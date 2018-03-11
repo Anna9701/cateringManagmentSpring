@@ -2,15 +2,19 @@ package com.zai.caterings.Models;
 
 import javax.persistence.*;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "roles", schema = "public", catalog = "catering")
 public class RolesEntity {
     private int id;
-    private Boolean isadmin;
+    private String name;
+   // private Boolean isadmin;
+    private Set<UsersEntity> users;
 
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public int getId() {
         return id;
     }
@@ -19,14 +23,12 @@ public class RolesEntity {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "isadmin")
-    public Boolean getIsadmin() {
-        return isadmin;
+    public String getName() {
+        return name;
     }
 
-    public void setIsadmin(Boolean isadmin) {
-        this.isadmin = isadmin;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
@@ -34,13 +36,20 @@ public class RolesEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         RolesEntity that = (RolesEntity) o;
-        return id == that.id &&
-                Objects.equals(isadmin, that.isadmin);
+        return id == that.id ;
     }
 
     @Override
     public int hashCode() {
+        return Objects.hash(id, name);
+    }
 
-        return Objects.hash(id, isadmin);
+    @ManyToMany(mappedBy = "roles")
+    public Set<UsersEntity> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<UsersEntity> users) {
+        this.users = users;
     }
 }

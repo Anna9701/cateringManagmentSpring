@@ -1,49 +1,23 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title th:text="${title}"></title>
-    <link rel='stylesheet' href='webjars/bootstrap/4.0.0-1/css/bootstrap.min.css'>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Login page</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../static/css/main.css" th:href="@{../static/css/main.css}" />
 </head>
 <body>
-<header>
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="#"><span th:text="${title}"></span></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-
-            </ul>
-            <form class="form-inline mt-2 mt-md-0">
-                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-
-            </form>
-            <div class="mt-2 mt-md-0">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/login/">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="/registration/">Registration</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-</header>
-
-<!-- FOOTER -->
-<footer class="container">
-    <p class="float-right"><a href="#">Back to top</a></p>
-    <p>&copy; 2018 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
-</footer>
-<script type="text/javascript" src="webjars/jquery/3.3.1-1/jquery.min.js"></script>
-<script type="text/javascript" src="webjars/bootstrap/4.0.0-1/js/bootstrap.min.js"></script>
+<h1>Login page</h1>
+<p>Example administrator: jim / demo</p>
+<p>Example user: bob / demo</p>
+<p>Example user and administrator: ted / demo</p>
+<p th:if="${loginError}" class="error">Wrong user or password</p>
+<form th:action="@{/login.html}" method="post">
+    <label for="username">Username</label>:
+    <input type="text" id="username" name="username" autofocus="autofocus" /> <br />
+    <label for="password">Password</label>:
+    <input type="password" id="password" name="password" /> <br />
+    <input type="submit" value="Log in" />
+</form>
+<p><a href="./index.html" th:href="@{/index.html}">Back to home page</a></p>
 </body>
 </html>
