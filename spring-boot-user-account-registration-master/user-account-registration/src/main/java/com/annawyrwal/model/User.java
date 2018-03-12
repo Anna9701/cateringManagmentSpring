@@ -1,4 +1,4 @@
-package com.codebyamir.model;
+package com.annawyrwal.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -30,7 +30,7 @@ public class User implements Serializable{
 
 	@Column(name = "email", nullable = false, unique = true)
 	@Email(message = "Please provide a valid e-mail")
-	@NotEmpty(message = "Please provide an e-mail")
+    @NotEmpty(message = "Please provide an e-mail")
 	private String email;
 	
 	@Column(name = "password")
@@ -103,16 +103,8 @@ public class User implements Serializable{
 	}
 
 
-    public Collection<? extends GrantedAuthority> getRole() {
-		GrantedAuthority grantedAuthority = new GrantedAuthority() {
-			@Override
-			public String getAuthority() {
-				return role;
-			}
-		};
-		Collection<GrantedAuthority> authorities = new ConcurrentLinkedQueue<>();
-		authorities.add(grantedAuthority);
-        return authorities;
+    public String getRole() {
+        return this.role;
     }
 
     public void setRole(String role) {

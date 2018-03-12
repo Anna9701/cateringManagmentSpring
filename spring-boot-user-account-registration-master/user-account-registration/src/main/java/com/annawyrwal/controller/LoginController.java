@@ -1,12 +1,13 @@
-package com.codebyamir.controller;
+package com.annawyrwal.controller;
 
-import com.codebyamir.model.User;
-import com.codebyamir.service.EmailService;
-import com.codebyamir.service.UserService;
+import com.annawyrwal.model.User;
+import com.annawyrwal.service.EmailService;
+import com.annawyrwal.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -35,9 +36,11 @@ public class LoginController {
 
     // Login form with error
     @RequestMapping("/login-error")
-    public String loginError(Model model) {
-        model.addAttribute("loginError", true);
-        return "login";
+    public ModelAndView loginError(ModelAndView model, BindingResult bindingResult, User user) {
+        model.addObject("user", user);
+        model.addObject("loginError", true);
+        model.setViewName("login");
+        return model;
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)

@@ -1,4 +1,4 @@
-package com.codebyamir.controller;
+package com.annawyrwal.controller;
 
 import java.util.Map;
 import java.util.UUID;
@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.codebyamir.model.User;
-import com.codebyamir.service.EmailService;
-import com.codebyamir.service.UserService;
+import com.annawyrwal.model.User;
+import com.annawyrwal.service.EmailService;
+import com.annawyrwal.service.UserService;
 import com.nulabinc.zxcvbn.Strength;
 import com.nulabinc.zxcvbn.Zxcvbn;
 
@@ -67,7 +67,7 @@ public class RegisterController {
 
 			// Set new password
 			user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-			user.setRole("Admin");
+			user.setRole("USER");
 			// Set user to enabled
 			user.setEnabled(true);
 

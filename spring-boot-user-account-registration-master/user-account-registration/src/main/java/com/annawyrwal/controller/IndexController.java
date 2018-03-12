@@ -1,4 +1,4 @@
-package com.codebyamir.controller;
+package com.annawyrwal.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class IndexOntroller {
+public class IndexController {
     private String IndexName = "Index";
 
     // Return registration form template

@@ -1,7 +1,6 @@
-package com.codebyamir.configuration;
+package com.annawyrwal.configuration;
 
-import com.codebyamir.service.MyUserDetailsService;
-import com.codebyamir.service.UserService;
+import com.annawyrwal.service.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,14 +25,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
 			.antMatchers("/register", "/", "/index").permitAll()
-		//	.antMatchers("/confirm").permitAll()
-		    .antMatchers("/catering").hasAnyRole("ADMIN", "USER")
+		    .antMatchers("/catering/**").hasAnyAuthority("ADMIN", "USER")
             .anyRequest().authenticated()
             .and().formLogin()
                 .loginPage("/login")
                 .permitAll()
                 .loginProcessingUrl("/app-login")
                 .defaultSuccessUrl("/index")
+                .failureUrl("/login-error")
             .and().logout().logoutUrl("/logout")
                 .logoutSuccessUrl("/index")
             .and().exceptionHandling()

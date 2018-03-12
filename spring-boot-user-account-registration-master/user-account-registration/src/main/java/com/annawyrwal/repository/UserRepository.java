@@ -1,9 +1,8 @@
-package com.codebyamir.repository;
+package com.annawyrwal.repository;
 
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
 
-import com.codebyamir.model.User;
+import com.annawyrwal.model.User;
 
 public interface UserRepository extends CrudRepository<User, String> {
 	 User findByEmail(String email);

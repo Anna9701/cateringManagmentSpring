@@ -1,7 +1,6 @@
-package com.codebyamir.service;
+package com.annawyrwal.service;
 
-import com.codebyamir.model.User;
-import com.codebyamir.repository.UserRepository;
+import com.annawyrwal.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

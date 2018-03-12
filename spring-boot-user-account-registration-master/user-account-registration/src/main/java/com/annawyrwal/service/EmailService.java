@@ -1,4 +1,4 @@
-package com.codebyamir.service;
+package com.annawyrwal.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
