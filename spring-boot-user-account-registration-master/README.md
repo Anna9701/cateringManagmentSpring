@@ -1,2 +1,3 @@
-# spring-boot-user-account-registration
-User Account Registration with Spring Boot
+# Catering management
+
+Caterings management with Spring Boot
