@@ -10,16 +10,24 @@ import javax.persistence.Table;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.annotation.Transient;
+import org.springframework.security.core.GrantedAuthority;
+
+import java.io.Serializable;
+import java.util.Collection;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 @Entity
 @Table(name = "user", schema = "public", catalog = "catering2")
-public class User {
-
+public class User implements Serializable{
+    private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id")
-	private int id;
-	
+	@Column(name = "username")
+	private String username;
+
+	@Column (name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+
 	@Column(name = "email", nullable = false, unique = true)
 	@Email(message = "Please provide a valid e-mail")
 	@NotEmpty(message = "Please provide an e-mail")
@@ -30,7 +38,6 @@ public class User {
 	private String password;
 	
 	@Column(name = "first_name")
-	@NotEmpty(message = "Please provide your first name")
 	private String firstName;
 	
 	@Column(name = "last_name")
@@ -43,6 +50,8 @@ public class User {
 	@Column(name = "confirmation_token")
 	private String confirmationToken;
 
+	@Column(name = "role")
+	private String role;
 	
 	public String getConfirmationToken() {
 		return confirmationToken;
@@ -52,14 +61,6 @@ public class User {
 		this.confirmationToken = confirmationToken;
 	}
 
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
 
 	public String getPassword() {
 		return password;
@@ -102,4 +103,27 @@ public class User {
 	}
 
 
+    public Collection<? extends GrantedAuthority> getRole() {
+		GrantedAuthority grantedAuthority = new GrantedAuthority() {
+			@Override
+			public String getAuthority() {
+				return role;
+			}
+		};
+		Collection<GrantedAuthority> authorities = new ConcurrentLinkedQueue<>();
+		authorities.add(grantedAuthority);
+        return authorities;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 }

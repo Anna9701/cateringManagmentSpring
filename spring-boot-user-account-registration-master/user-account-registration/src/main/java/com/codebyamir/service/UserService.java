@@ -1,6 +1,9 @@
 package com.codebyamir.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.codebyamir.model.User;
@@ -19,7 +22,11 @@ public class UserService {
 	public User findByEmail(String email) {
 		return userRepository.findByEmail(email);
 	}
-	
+
+	public User findByUsername(String username) {
+	    return userRepository.findByUsername(username);
+    }
+
 	public User findByConfirmationToken(String confirmationToken) {
 		return userRepository.findByConfirmationToken(confirmationToken);
 	}
@@ -27,5 +34,6 @@ public class UserService {
 	public void saveUser(User user) {
 		userRepository.save(user);
 	}
+
 
 }
