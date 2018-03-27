@@ -21,6 +21,10 @@ public class MyUserPrincipal implements UserDetails {
         return Arrays.asList(new SimpleGrantedAuthority(user.getRole()));
     }
 
+    public User getUser() {
+        return user;
+    }
+
     @Override
     public String getPassword() {
         return user.getPassword();

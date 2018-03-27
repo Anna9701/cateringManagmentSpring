@@ -1,4 +1,4 @@
-package com.zai.caterings.Models;
+package com.annawyrwal.model;
 
 import javax.persistence.*;
 import java.sql.Date;

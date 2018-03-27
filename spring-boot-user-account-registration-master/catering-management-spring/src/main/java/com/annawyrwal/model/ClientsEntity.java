@@ -1,4 +1,4 @@
-package com.zai.caterings.Models;
+package com.annawyrwal.model;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -9,6 +9,17 @@ public class ClientsEntity {
     private int id;
     private String firstName;
     private String lastName;
+    private User userByUsername;
+
+    @OneToOne
+    @JoinColumn(name = "username", referencedColumnName = "username", nullable = false)
+    public User getUserByUsername() {
+        return userByUsername;
+    }
+
+    public void setUserByUsername(User userByUsername) {
+        this.userByUsername = userByUsername;
+    }
 
     @Id
     @Column(name = "id")

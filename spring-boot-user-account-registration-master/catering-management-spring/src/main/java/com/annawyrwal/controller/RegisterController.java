@@ -6,6 +6,10 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import com.annawyrwal.model.ClientsEntity;
+import com.annawyrwal.model.ContactDataEntity;
+import com.annawyrwal.service.ClientEntityService;
+import com.annawyrwal.service.ContactDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -29,13 +33,18 @@ public class RegisterController {
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	private UserService userService;
 	private EmailService emailService;
-	
+	private ClientEntityService clientEntityService;
+	private ContactDataService contactDataService;
+
 	@Autowired
 	public RegisterController(BCryptPasswordEncoder bCryptPasswordEncoder,
-			UserService userService, EmailService emailService) {
+			UserService userService, EmailService emailService,
+		    ClientEntityService clientEntityService, ContactDataService contactDataService) {
 		this.bCryptPasswordEncoder = bCryptPasswordEncoder;
 		this.userService = userService;
 		this.emailService = emailService;
+		this.clientEntityService = clientEntityService;
+		this.contactDataService = contactDataService;
 	}
 	
 	// Return registration form template
@@ -64,7 +73,6 @@ public class RegisterController {
 		if (bindingResult.hasErrors()) { 
 			modelAndView.setViewName("register");		
 		} else { // new user so we create user and send confirmation e-mail
-
 			// Set new password
 			user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 			user.setRole("USER");
@@ -73,6 +81,7 @@ public class RegisterController {
 
 			// Save user
 			userService.saveUser(user);
+
 		    user.setConfirmationToken(UUID.randomUUID().toString());
 				
 			String appUrl = request.getScheme() + "://" + request.getServerName();
@@ -85,14 +94,30 @@ public class RegisterController {
 			registrationEmail.setFrom("noreply@domain.com");
 			
 			emailService.sendEmail(registrationEmail);
-			
+			addUserToClients(user); // for now each new user will be client
+
 			modelAndView.addObject("confirmationMessage", "A confirmation e-mail has been sent to " + user.getEmail());
 			modelAndView.setViewName("register");
 		}
 			
 		return modelAndView;
 	}
-	
+
+	private void addUserToClients(User user) {
+        ClientsEntity clientAccount = new ClientsEntity();
+        clientAccount.setLastName(user.getLastName());
+        clientAccount.setUserByUsername(user);
+        clientEntityService.saveClient(clientAccount);
+		addUserContactData(clientAccount, user);
+    }
+
+    private void addUserContactData(ClientsEntity clientsEntity, User user) {
+		ContactDataEntity contactDataEntity = new ContactDataEntity();
+		contactDataEntity.setClientsByClientid(clientsEntity);
+		contactDataEntity.setEmail(user.getEmail());
+		contactDataService.saveContactData(contactDataEntity);
+	}
+
 	// Process confirmation link
 	@RequestMapping(value="/confirm", method = RequestMethod.GET)
 	public ModelAndView confirmRegistration(ModelAndView modelAndView, @RequestParam("token") String token) {

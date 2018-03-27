@@ -17,16 +17,12 @@ import java.util.Collection;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 @Entity
-@Table(name = "user", schema = "public", catalog = "catering2")
+@Table(name = "user", schema = "public", catalog = "catering")
 public class User implements Serializable{
     private static final long serialVersionUID = 1L;
 	@Id
 	@Column(name = "username")
 	private String username;
-
-	@Column (name = "id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
 
 	@Column(name = "email", nullable = false, unique = true)
 	@Email(message = "Please provide a valid e-mail")
@@ -36,9 +32,6 @@ public class User implements Serializable{
 	@Column(name = "password")
 	@Transient
 	private String password;
-	
-	@Column(name = "first_name")
-	private String firstName;
 	
 	@Column(name = "last_name")
 	@NotEmpty(message = "Please provide your last name")
@@ -68,14 +61,6 @@ public class User implements Serializable{
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
 	}
 
 	public String getLastName() {
