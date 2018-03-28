@@ -11,13 +11,45 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
-        body {
-            font-family: "Lato", sans-serif
+        hr{
+            width: 10%;
+            color: #fff;
         }
 
-        .mySlides {
-            display: none
+        .form-group{
+            margin-bottom: 15px;
         }
+
+        label{
+            margin-bottom: 15px;
+        }
+
+        .inputField,
+        input::-webkit-input-placeholder {
+            font-size: 11px;
+            padding-top: 3px;
+        }
+
+        .main-login{
+            background-color: #d3d3d3;
+            /* shadows and rounded borders */
+            -moz-border-radius: 2px;
+            -webkit-border-radius: 2px;
+            border-radius: 2px;
+            -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+            -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+            box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+
+        }
+
+        .main-center{
+            margin-top: 30px;
+            margin: 0 auto;
+            max-width: 330px;
+            padding: 40px 40px;
+
+        }
+
     </style>
     <!-- Bootstrap core CSS -->
     <link
@@ -25,8 +57,6 @@
             rel="stylesheet"
             integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
             crossorigin="anonymous"/>
-
-    <link th:href="@{index.html}" rel="stylesheet"/>
 </head>
 
 <body class="gray-bg">
@@ -63,14 +93,16 @@
     <a href="#contact" class="w3-bar-item w3-button w3-padding-large">X</a>
     <a href="#" class="w3-bar-item w3-button w3-padding-large">X</a>
 </div>
-<div class="middle-box text-center loginscreen animated fadeInDown">
+<div class="middle-box text-center loginscreen animated fadeInDown"> <br/><br/>
 
-            <br/><br/>
-            <h4>Login</h4>
+    <div class="panel-title text-center">
+        <h1 class="title">Login</h1><hr/>
+    </div>
 
-            <form autocomplete="off" action="#" th:action="@{/app-login}" method="POST"
-                  th:object="${user}" method="post" class="m-t" role="form"
-                  data-toggle="validator">
+    <div class="main-login main-center">
+        <form autocomplete="off" action="#" th:action="@{/app-login}" method="POST"
+              th:object="${user}" method="post" class="m-t" role="form"
+              data-toggle="validator">
 
                 <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}"
                      class="validation-message alert alert-danger" role="alert">Invalid username</div>
@@ -82,35 +114,39 @@
                 <div th:if="${loginError}"
                      class="validation-message alert alert-danger" role="alert">Invalid credentials</div>
 
-                <div class="form-group input-group has-feedback">
-          <span class="input-group-addon">
-            <span class="glyphicon glyphicon-user"></span>
-          </span>
-                    <input type="text" name="username" id="username" th:field="*{username}"
-                           placeholder="Username" class="form-control"
-                           data-error="This username is invalid" required/>
-                    <span class="glyphicon form-control-feedback"
-                          aria-hidden="true"></span>
+
+            <div class="form-group">
+                <label for="username" class="cols-sm-2 control-label">Username</label>
+                <div class="cols-sm-10">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                        <label th:if="${#fields.hasErrors('username')}"
+                               th:errors="*{username}" class="validation-message"></label>
+                        <input type="text" th:field="*{username}"
+                               placeholder="Username" id="username" class="form-control inputField" required/>
+                    </div>
                 </div>
+            </div>
 
-                <div class="form-group input-group has-feedback">
-          <span class="input-group-addon">
-            <span class="glyphicon glyphicon-lock"></span>
-          </span>
-                    <input type="password" name="password" id="password" th:field="*{password}"
-                           placeholder="Password" class="form-control"
-                           data-error="This password is invalid" required/>
-                    <span class="glyphicon form-control-feedback"
-                          aria-hidden="true"></span>
+            <div class="form-group">
+                <label for="password" class="cols-sm-2 control-label">Password</label>
+                <div class="cols-sm-10">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fas fa-lock fa" aria-hidden="true"></i></span>
+                        <label th:if="${#fields.hasErrors('password')}"
+                               th:errors="*{password}" class="validation-message"></label>
+                        <input type="password" th:field="*{password}"
+                               placeholder="Password" id="password" class="form-control inputField" required/>
+                    </div>
                 </div>
+            </div>
 
 
-                <input type="submit"
-                        class="btn btn-primary block full-width m-b" value="Login"/>
+                <input type="submit" class="btn btn-primary block full-width m-b" value="Login"/>
             </form>
 
         </div>
-
+</div>
 <div class="container">
     <!-- Footer -->
     <footer class="w3-container w3-padding-64 w3-center w3-opacity w3-xlarge">

@@ -4,26 +4,70 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
 <head>
-  <title th:text="${IndexName}"></title>
+  <title th:text="Account"></title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Bootstrap core CSS -->
+    <link
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+            crossorigin="anonymous"/>
+
     <style>
-        body {font-family: "Lato", sans-serif}
-        .mySlides {display: none}
+        hr{
+            width: 10%;
+            color: #fff;
+        }
+
+        .form-group{
+            margin-bottom: 15px;
+        }
+
+        label{
+            margin-bottom: 15px;
+        }
+
+        .inputField,
+        input::-webkit-input-placeholder {
+            font-size: 11px;
+            padding-top: 3px;
+        }
+
+        .main-login{
+            background-color: #d3d3d3;
+            /* shadows and rounded borders */
+            -moz-border-radius: 2px;
+            -webkit-border-radius: 2px;
+            border-radius: 2px;
+            -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+            -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+            box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+
+        }
+
+        .main-center{
+            margin-top: 30px;
+            margin: 0 auto;
+            max-width: 330px;
+            padding: 40px 40px;
+
+        }
+
     </style>
-<body>
+    <body>
 
 <!-- Navbar -->
 <div class="w3-top">
     <div class="w3-bar w3-black w3-card">
         <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
-        <a href="#" class="w3-bar-item w3-button w3-padding-large">X</a>
-        <a href="#band" class="w3-bar-item w3-button w3-padding-large w3-hide-small">X</a>
-        <a href="#tour" class="w3-bar-item w3-button w3-padding-large w3-hide-small">X</a>
-        <a href="#contact" class="w3-bar-item w3-button w3-padding-large w3-hide-small">X</a>
+        <a href="/index" class="w3-bar-item w3-button w3-padding-large">HOME</a>
+        <a href="#" class="w3-bar-item w3-button w3-padding-large w3-hide-small">X</a>
+        <a href="#" class="w3-bar-item w3-button w3-padding-large w3-hide-small">X</a>
+        <a href="#" class="w3-bar-item w3-button w3-padding-large w3-hide-small">X</a>
         <div class="w3-dropdown-hover w3-hide-small">
             <button class="w3-padding-large w3-button" title="More">X <i class="fa fa-caret-down"></i></button>
             <div class="w3-dropdown-content w3-bar-block w3-card-4">
@@ -33,9 +77,9 @@
             </div>
         </div>
         <form  sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
-            <input value="Sign out" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right" type="submit"/>
+            <input value="Sign out" class="w3-bar-item w3-button w3-hide-small w3-right" type="submit"/>
         </form>
-        <a href="/account" sec:authorize="isAuthenticated()" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">Hello  <span sec:authentication="name"></span></a>
+        <a href="/account" sec:authorize="isAuthenticated()" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">Hello <span sec:authentication="name"></span></a>
         <a sec:authorize="isAnonymous()" href="/login" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">Login</a>
         <a sec:authorize="isAnonymous()" href="/register" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">Register</a>
         <a href="javascript:void(0)" class="w3-padding-large w3-hover-red w3-hide-small w3-right"><i
@@ -52,30 +96,77 @@
 </div>
 
 <!-- Page content -->
-<div class="w3-content middle-box text-center animated fadeInDown" style="max-width:2000px;margin-top:46px">
+<div class="middle-box text-center animated fadeInDown" style="max-width:2000px;margin-top:46px">
+    <br/><br/>
+    <div class="panel-title text-center">
+        <h1 class="title">Update account details</h1>
+        <hr />
+    </div>
 
-    <h4>Edit profile</h4>
-
+    <div class="main-login main-center">
     <form autocomplete="off" action="#" th:action="@{/account/editClient}"
-          method="post" class="m-t" role="form"
+          method="post" class="m-t form-horizontal" role="form"
           data-toggle="validator">
 
-        <input type="text" th:object="${clientsEntity}" th:field="*{firstName}"
-               placeholder="First Name" class="form-control"/><br/>
-        <input type="text" th:object="${clientsEntity}" th:field="*{lastName}"
-               placeholder="Last Name" class="form-control" required/><br/>
-        <input type="text" th:object="${contactDataEntity}" th:field="*{email}"
-               placeholder="E-mail" class="form-control" required/><br/>
-        <input type="text" th:object="${contactDataEntity}" th:field="*{phone}"
-               placeholder="Phone" class="form-control"/><br/>
-        <input type="text" th:object="${contactDataEntity}" th:field="*{fax}"
-               placeholder="Fax" class="form-control"/><br/>
+        <div class="form-group">
+            <label for="firstName" class="cols-sm-2 control-label">First Name</label>
+            <div class="cols-sm-10">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                    <input type="text" th:object="${clientsEntity}" th:field="*{firstName}"
+                           placeholder="First Name" id="firstName" class="form-control inputField"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="lastName" class="cols-sm-2 control-label">Last Name</label>
+            <div class="cols-sm-10">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                    <input type="text" th:object="${clientsEntity}" th:field="*{lastName}"
+                           placeholder="First Name" id="lastName" class="form-control inputField" required/>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="email" class="cols-sm-2 control-label">E-mail address</label>
+            <div class="cols-sm-10">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                    <input type="text" th:object="${contactDataEntity}" th:field="*{email}"
+                           placeholder="E-mail address" id="email" class="inputField form-control" required/>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="phone" class="cols-sm-2 control-label">Phone number</label>
+            <div class="cols-sm-10">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fas fa-phone fa" aria-hidden="true"></i></span>
+                    <input type="text" th:object="${contactDataEntity}" th:field="*{phone}"
+                           placeholder="Phone number" id="phone" class="inputField form-control"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="fax" class="cols-sm-2 control-label">Fax number</label>
+            <div class="cols-sm-10">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fas fa-fax fa" aria-hidden="true"></i></span>
+                    <input type="text" th:object="${contactDataEntity}" th:field="*{fax}"
+                           placeholder="Fax number" id="fax" class="inputField form-control"/>
+                </div>
+            </div>
+        </div>
 
         <button type="submit" class="btn btn-primary block full-width m-b">
             Update
         </button>
-
-    </form>
+    </form> </div>
 <!-- End Page Content -->
 </div>
 
@@ -91,43 +182,20 @@
                 | Logged user: <span sec:authentication="name"></span> |
                 Roles: <span sec:authentication="principal.authorities"></span> |
 
-            </span>
+</span>
 
-<script>
-    // Automatic Slideshow - change image every 4 seconds
-    var myIndex = 0;
-    carousel();
+<!-- jQuery-->
+<script
+        src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
-    function carousel() {
-        var i;
-        var x = document.getElementsByClassName("mySlides");
-        for (i = 0; i < x.length; i++) {
-            x[i].style.display = "none";
-        }
-        myIndex++;
-        if (myIndex > x.length) {myIndex = 1}
-        x[myIndex-1].style.display = "block";
-        setTimeout(carousel, 4000);
-    }
+<!-- Bootstrap -->
+<script
+        src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
 
-    // Used to toggle the menu on small screens when clicking on the menu button
-    function myFunction() {
-        var x = document.getElementById("navDemo");
-        if (x.className.indexOf("w3-show") == -1) {
-            x.className += " w3-show";
-        } else {
-            x.className = x.className.replace(" w3-show", "");
-        }
-    }
-
-    // When the user clicks anywhere outside of the modal, close it
-    var modal = document.getElementById('ticketModal');
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
-</script>
+<!-- Bootstrap Validator plugin -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
 
 </body>
 </html>

@@ -24,7 +24,7 @@ public class AccountController {
         this.contactDataService = contactDataService;
     }
 
-    // Return registration form template
+    // Return account details form template
     @RequestMapping(value="/account", method = RequestMethod.GET)
     public ModelAndView showRegistrationPage(ModelAndView modelAndView){
         MyUserPrincipal user = (MyUserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

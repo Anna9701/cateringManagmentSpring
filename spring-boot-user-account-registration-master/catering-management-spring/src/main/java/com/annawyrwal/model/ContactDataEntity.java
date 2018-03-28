@@ -13,6 +13,7 @@ public class ContactDataEntity {
     private ClientsEntity clientsByClientid;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     public int getId() {
         return id;
