@@ -1,11 +1,6 @@
 package com.annawyrwal.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -21,7 +16,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 public class User implements Serializable{
     private static final long serialVersionUID = 1L;
 	@Id
-	@Column(name = "username")
+	@Column(name = "username", unique = true)
 	private String username;
 
 	@Column(name = "email", nullable = false, unique = true)

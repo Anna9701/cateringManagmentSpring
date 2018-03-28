@@ -104,9 +104,12 @@
     </div>
 
     <div class="main-login main-center">
-    <form autocomplete="off" action="#" th:action="@{/account/editClient}"
+    <form autocomplete="off" action="#" th:action="@{/account}"
           method="post" class="m-t form-horizontal" role="form"
           data-toggle="validator">
+
+        <div th:if="${successMessage}" class="alert alert-success"
+             role="alert" th:text="${successMessage}"></div>
 
         <div class="form-group">
             <label for="firstName" class="cols-sm-2 control-label">First Name</label>
@@ -129,6 +132,11 @@
                 </div>
             </div>
         </div>
+
+        <input type="hidden" th:object="${clientsEntity}" th:field="*{userByUsername}"/>
+        <input type="hidden" th:object="${contactDataEntity}"  th:field="*{clientsByClientid}"/>
+        <input type="hidden" th:object="${clientsEntity}" th:field="*{id}"/>
+        <input type="hidden" th:object="${contactDataEntity}"  th:field="*{id}"/>
 
         <div class="form-group">
             <label for="email" class="cols-sm-2 control-label">E-mail address</label>
