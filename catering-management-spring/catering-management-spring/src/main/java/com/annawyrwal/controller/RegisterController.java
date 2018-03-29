@@ -107,7 +107,7 @@ public class RegisterController {
         ClientsEntity clientAccount = new ClientsEntity();
         clientAccount.setLastName(user.getLastName());
         clientAccount.setUserByUsername(user);
-        clientEntityService.saveClient(clientAccount);
+        clientEntityService.addClient(clientAccount);
 		addUserContactData(clientAccount, user);
     }
 
@@ -115,7 +115,7 @@ public class RegisterController {
 		ContactDataEntity contactDataEntity = new ContactDataEntity();
 		contactDataEntity.setClientsByClientid(clientsEntity);
 		contactDataEntity.setEmail(user.getEmail());
-		contactDataService.saveContactData(contactDataEntity);
+		contactDataService.addContactData(contactDataEntity);
 	}
 
 	// Process confirmation link

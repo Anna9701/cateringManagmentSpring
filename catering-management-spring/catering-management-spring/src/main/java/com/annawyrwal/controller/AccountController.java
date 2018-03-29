@@ -30,13 +30,15 @@ public class AccountController {
 
     // Return account details form template
     @RequestMapping(value = "/account", method = RequestMethod.GET)
-    public ModelAndView showRegistrationPage(ModelAndView modelAndView) {
+    public ModelAndView showRegistrationPage(ModelAndView modelAndView, HttpServletRequest request) {
         MyUserPrincipal user = (MyUserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        ClientsEntity clientsEntity = clientEntityService.findByUsername(user.getUser());
-        ContactDataEntity contactDataEntity = contactDataService.findByClientid(clientsEntity);
+        ClientsEntity clientsEntity = clientEntityService.findByUser(user.getUser());
+        ContactDataEntity contactDataEntity = contactDataService.findByClient(clientsEntity);
+
         modelAndView.addObject("clientsEntity", clientsEntity);
         modelAndView.addObject("contactDataEntity", contactDataEntity);
         modelAndView.setViewName("account");
+
         return modelAndView;
     }
 
@@ -52,12 +54,9 @@ public class AccountController {
             return modelAndView;
         }
 
-        System.out.println(clientsEntity.getId());
-
-        clientEntityService.saveClient(clientsEntity);
-        //check why contact data id is smaller than in database.
-        contactDataService.saveContactData(contactDataEntity);
-
+        contactDataEntity.setClientsByClientid(clientsEntity);
+        clientEntityService.updateClient(clientsEntity);
+        contactDataService.updateContactData(contactDataEntity);
         modelAndView.addObject("successMessage", "Your account was successfully updated.");
 
         return modelAndView;
