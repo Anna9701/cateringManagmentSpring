@@ -1,4 +1,4 @@
-package com.annawyrwal.service.Authentication;
+package com.annawyrwal.Service.Authentication;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;

@@ -1,10 +1,10 @@
-package com.annawyrwal.controller;
+package com.annawyrwal.Controller;
 
 import com.annawyrwal.model.ClientsEntity;
 import com.annawyrwal.model.ContactDataEntity;
-import com.annawyrwal.service.ClientEntityService;
-import com.annawyrwal.service.ContactDataService;
-import com.annawyrwal.service.Authentication.MyUserPrincipal;
+import com.annawyrwal.Service.ClientEntityService;
+import com.annawyrwal.Service.ContactDataService;
+import com.annawyrwal.Service.Authentication.MyUserPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;

@@ -1,4 +1,4 @@
-package com.annawyrwal.persistance;
+package com.annawyrwal.Configuration.Persistance;
 
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;

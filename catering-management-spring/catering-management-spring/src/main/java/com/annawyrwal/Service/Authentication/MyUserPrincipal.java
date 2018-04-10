@@ -1,4 +1,4 @@
-package com.annawyrwal.service.Authentication;
+package com.annawyrwal.Service.Authentication;
 
 import com.annawyrwal.model.User;
 import org.springframework.security.core.GrantedAuthority;

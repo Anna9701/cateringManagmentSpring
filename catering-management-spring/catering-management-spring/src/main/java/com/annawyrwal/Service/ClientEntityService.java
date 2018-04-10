@@ -1,4 +1,4 @@
-package com.annawyrwal.service;
+package com.annawyrwal.Service;
 
 import com.annawyrwal.model.ClientsEntity;
 import com.annawyrwal.model.User;

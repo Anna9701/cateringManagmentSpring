@@ -8,9 +8,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @SpringBootApplication
 @EnableAsync
 @EnableTransactionManagement
-public class UserAccountRegistrationApplication {
+public class CateringManagementApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(UserAccountRegistrationApplication.class, args);
+		SpringApplication.run(CateringManagementApplication.class, args);
 	}
 }

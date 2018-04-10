@@ -1,8 +1,8 @@
-package com.annawyrwal.controller;
+package com.annawyrwal.Controller;
 
 import com.annawyrwal.model.User;
-import com.annawyrwal.service.Authentication.EmailService;
-import com.annawyrwal.service.Authentication.UserService;
+import com.annawyrwal.Service.Authentication.EmailService;
+import com.annawyrwal.Service.Authentication.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;

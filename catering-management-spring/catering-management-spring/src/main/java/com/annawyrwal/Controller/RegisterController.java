@@ -1,4 +1,4 @@
-package com.annawyrwal.controller;
+package com.annawyrwal.Controller;
 
 import java.util.Map;
 import java.util.UUID;
@@ -8,8 +8,8 @@ import javax.validation.Valid;
 
 import com.annawyrwal.model.ClientsEntity;
 import com.annawyrwal.model.ContactDataEntity;
-import com.annawyrwal.service.ClientEntityService;
-import com.annawyrwal.service.ContactDataService;
+import com.annawyrwal.Service.ClientEntityService;
+import com.annawyrwal.Service.ContactDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -22,8 +22,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.annawyrwal.model.User;
-import com.annawyrwal.service.Authentication.EmailService;
-import com.annawyrwal.service.Authentication.UserService;
+import com.annawyrwal.Service.Authentication.EmailService;
+import com.annawyrwal.Service.Authentication.UserService;
 import com.nulabinc.zxcvbn.Strength;
 import com.nulabinc.zxcvbn.Zxcvbn;
 

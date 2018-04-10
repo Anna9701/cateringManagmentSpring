@@ -1,4 +1,4 @@
-package com.annawyrwal.configuration;
+package com.annawyrwal.Configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
