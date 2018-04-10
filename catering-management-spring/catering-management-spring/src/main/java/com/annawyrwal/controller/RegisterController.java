@@ -22,8 +22,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.annawyrwal.model.User;
-import com.annawyrwal.service.EmailService;
-import com.annawyrwal.service.UserService;
+import com.annawyrwal.service.Authentication.EmailService;
+import com.annawyrwal.service.Authentication.UserService;
 import com.nulabinc.zxcvbn.Strength;
 import com.nulabinc.zxcvbn.Zxcvbn;
 

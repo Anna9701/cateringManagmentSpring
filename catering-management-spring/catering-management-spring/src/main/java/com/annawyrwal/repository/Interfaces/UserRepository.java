@@ -1,4 +1,4 @@
-package com.annawyrwal.repository;
+package com.annawyrwal.repository.Interfaces;
 
 import org.springframework.data.repository.CrudRepository;
 

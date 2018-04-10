@@ -8,6 +8,7 @@ import java.util.Objects;
 public class DishesEntity {
     private int id;
     private String name;
+    private byte[] image;
 
     @Id
     @Column(name = "id")
@@ -38,9 +39,21 @@ public class DishesEntity {
                 Objects.equals(name, that.name);
     }
 
+
+
     @Override
     public int hashCode() {
 
         return Objects.hash(id, name);
+    }
+
+    @Lob
+    @Column(name="dishImage", columnDefinition = "bytea")
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 }

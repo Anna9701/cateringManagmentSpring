@@ -1,7 +1,8 @@
-package com.annawyrwal.repository;
+package com.annawyrwal.repository.Services;
 
 import com.annawyrwal.model.ClientsEntity;
 import com.annawyrwal.model.ContactDataEntity;
+import com.annawyrwal.repository.Interfaces.ContactDataRepository;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

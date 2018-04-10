@@ -1,6 +1,6 @@
 package com.annawyrwal.configuration;
 
-import com.annawyrwal.service.MyUserDetailsService;
+import com.annawyrwal.service.Authentication.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

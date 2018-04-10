@@ -2,8 +2,7 @@ package com.annawyrwal.service;
 
 import com.annawyrwal.model.ClientsEntity;
 import com.annawyrwal.model.ContactDataEntity;
-import com.annawyrwal.repository.ClientRepository;
-import com.annawyrwal.repository.ContactDataRepository;
+import com.annawyrwal.repository.Interfaces.ContactDataRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,7 +1,8 @@
-package com.annawyrwal.repository;
+package com.annawyrwal.repository.Services;
 
 import com.annawyrwal.model.ClientsEntity;
 import com.annawyrwal.model.User;
+import com.annawyrwal.repository.Interfaces.ClientRepository;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -13,7 +14,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class ClientRepositoryImpl implements ClientRepository  {
+public class ClientRepositoryImpl implements ClientRepository {
     private SessionFactory sessionFactory;
 
     @Autowired

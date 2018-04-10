@@ -2,11 +2,9 @@ package com.annawyrwal.service;
 
 import com.annawyrwal.model.ClientsEntity;
 import com.annawyrwal.model.User;
-import com.annawyrwal.repository.ClientRepository;
-import org.hibernate.Session;
+import com.annawyrwal.repository.Interfaces.ClientRepository;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -55,6 +53,7 @@ public class ClientEntityServiceImpl implements ClientEntityService {
     }
 
     @Override
+    @Transactional
     public ClientsEntity updateClient(ClientsEntity clientsEntity) {
         return clientRepository.updateClientEntity(clientsEntity);
     }
