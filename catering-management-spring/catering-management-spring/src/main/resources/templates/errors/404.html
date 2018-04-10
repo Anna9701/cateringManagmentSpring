@@ -2,10 +2,10 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>403 - Access forbidden</title>
+    <title>404 - Not Found</title>
 </head>
 <body>
-<h3>Access Denied Exception</h3>
+<h3>Not Found Exception</h3>
 <div>
     Logged in user: <b th:inline="text"  class="user"> [[${#httpServletRequest.remoteUser}]] </b>
     <form th:action="@{/app-logout}" method="POST">
