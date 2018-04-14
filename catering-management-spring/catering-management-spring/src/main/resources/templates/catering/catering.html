@@ -65,7 +65,7 @@
     <div class="w3-bar w3-black w3-card">
         <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
         <a href="/index" class="w3-bar-item w3-button w3-padding-large">HOME</a>
-        <a href="/catering" class="w3-bar-item w3-button w3-padding-large w3-hide-small">CATERINGS</a>
+        <a href="/catering/catering" class="w3-bar-item w3-button w3-padding-large w3-hide-small">CATERINGS</a>
         <a href="#" class="w3-bar-item w3-button w3-padding-large w3-hide-small">X</a>
         <a href="#" class="w3-bar-item w3-button w3-padding-large w3-hide-small">X</a>
         <div class="w3-dropdown-hover w3-hide-small">
@@ -91,10 +91,11 @@
 <!-- Navbar on small screens -->
 <div id="navDemo" class="w3-bar-block w3-black w3-hide w3-hide-large w3-hide-medium w3-top" style="margin-top:46px">
     <a href="/index" class="w3-bar-item w3-button w3-padding-large">INDEX</a>
-    <a href="/catering" class="w3-bar-item w3-button w3-padding-large">CATERINGS</a>
+    <a href="/catering/catering" class="w3-bar-item w3-button w3-padding-large">CATERINGS</a>
     <a href="#contact" class="w3-bar-item w3-button w3-padding-large">X</a>
     <a href="#" class="w3-bar-item w3-button w3-padding-large">X</a>
 </div>
+
 <div class="w3-content" style="max-width:2000px;margin-top:46px">
     <!-- Page content -->
     <br/>
@@ -113,7 +114,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr th:each="catering : ${cateringsList}">
+            <tr th:each="catering : ${cateringsList.pageList}">
                 <td th:text="${catering.id}"></td>
                 <td th:text="${catering.name}"></td>
                 <td>
@@ -125,6 +126,11 @@
             </tr>
         </tbody>
     </table>
+    <a th:if="${!cateringsList.firstPage}"
+       th:href="@{/catering/catering/__${cateringsList.page - 1}__}">Previous</a>
+    <span th:text="${cateringsList.page + 1}">1 / 10</span>
+    <a th:if="${!cateringsList.lastPage}"
+       th:href="@{/catering/catering/__${cateringsList.page + 1}__}">Next</a>
     </div>
 <!-- End Page Content -->
 </div>
