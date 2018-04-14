@@ -8,9 +8,9 @@ import java.util.List;
 
 public interface ClientRepository  {
     ClientsEntity findByUser(User user);
-    public void addClientEntity(ClientsEntity clientsEntity);
-    public List<ClientsEntity> getAllClientsEntities();
-    public void deleteClientEntity(Integer clientId);
-    public ClientsEntity updateClientEntity(ClientsEntity clientsEntity);
-    public ClientsEntity getClientEntity (int clientId);
+    void addClientEntity(ClientsEntity clientsEntity);
+    List<ClientsEntity> getAllClientsEntities();
+    void deleteClientEntity(Integer clientId);
+    ClientsEntity updateClientEntity(ClientsEntity clientsEntity);
+    ClientsEntity getClientEntity (int clientId);
 }

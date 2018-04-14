@@ -1,5 +1,6 @@
-package com.annawyrwal.Service;
+package com.annawyrwal.Service.Implementations;
 
+import com.annawyrwal.Service.Interfaces.ClientEntityService;
 import com.annawyrwal.model.ClientsEntity;
 import com.annawyrwal.model.User;
 import com.annawyrwal.repository.Interfaces.ClientRepository;

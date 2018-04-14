@@ -1,4 +1,4 @@
-package com.annawyrwal.Service;
+package com.annawyrwal.Service.Interfaces;
 
 import com.annawyrwal.model.ClientsEntity;
 import com.annawyrwal.model.ContactDataEntity;

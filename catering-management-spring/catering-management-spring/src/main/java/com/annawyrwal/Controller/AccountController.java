@@ -2,8 +2,8 @@ package com.annawyrwal.Controller;
 
 import com.annawyrwal.model.ClientsEntity;
 import com.annawyrwal.model.ContactDataEntity;
-import com.annawyrwal.Service.ClientEntityService;
-import com.annawyrwal.Service.ContactDataService;
+import com.annawyrwal.Service.Interfaces.ClientEntityService;
+import com.annawyrwal.Service.Interfaces.ContactDataService;
 import com.annawyrwal.Service.Authentication.MyUserPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;

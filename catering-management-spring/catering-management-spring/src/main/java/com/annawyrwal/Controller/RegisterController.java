@@ -8,8 +8,8 @@ import javax.validation.Valid;
 
 import com.annawyrwal.model.ClientsEntity;
 import com.annawyrwal.model.ContactDataEntity;
-import com.annawyrwal.Service.ClientEntityService;
-import com.annawyrwal.Service.ContactDataService;
+import com.annawyrwal.Service.Interfaces.ClientEntityService;
+import com.annawyrwal.Service.Interfaces.ContactDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
