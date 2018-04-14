@@ -1,5 +1,6 @@
-package com.annawyrwal.Service.Interfaces;
+package com.annawyrwal.Service.Implementations;
 
+import com.annawyrwal.Service.Interfaces.DishOrderEntityService;
 import com.annawyrwal.model.DishOrdersEntity;
 import com.annawyrwal.repository.Interfaces.DishOrdersRepository;
 import org.springframework.beans.factory.annotation.Autowired;

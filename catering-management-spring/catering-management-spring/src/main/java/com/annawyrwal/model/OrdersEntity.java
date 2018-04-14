@@ -18,6 +18,7 @@ public class OrdersEntity {
     private DatesEntity datesByDateid;
 
     @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name = "id")
     public int getId() {
         return id;

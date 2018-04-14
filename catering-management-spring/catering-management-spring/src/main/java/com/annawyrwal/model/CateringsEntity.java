@@ -8,8 +8,10 @@ import java.util.Objects;
 public class CateringsEntity {
     private int id;
     private String name;
+    private ClientsEntity clientsByClientid;
 
     @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name = "id")
     public int getId() {
         return id;
@@ -42,5 +44,15 @@ public class CateringsEntity {
     public int hashCode() {
 
         return Objects.hash(id, name);
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "clientid", referencedColumnName = "id", nullable = false)
+    public ClientsEntity getClientsByClientid() {
+        return clientsByClientid;
+    }
+
+    public void setClientsByClientid(ClientsEntity clientsByClientid) {
+        this.clientsByClientid = clientsByClientid;
     }
 }

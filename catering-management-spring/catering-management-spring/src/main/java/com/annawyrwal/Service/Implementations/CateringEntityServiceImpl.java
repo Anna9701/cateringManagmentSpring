@@ -2,6 +2,7 @@ package com.annawyrwal.Service.Implementations;
 
 import com.annawyrwal.Service.Interfaces.CateringEntityService;
 import com.annawyrwal.model.CateringsEntity;
+import com.annawyrwal.model.ClientsEntity;
 import com.annawyrwal.repository.Interfaces.CateringRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -53,5 +54,10 @@ public class CateringEntityServiceImpl implements CateringEntityService {
     @Override
     public void addCateringEntity(CateringsEntity cateringsEntity) {
         cateringRepository.addCateringEntity(cateringsEntity);
+    }
+
+    @Override
+    public List<CateringsEntity> getCateringsEntitiesByClient(ClientsEntity clientsEntity) {
+        return cateringRepository.getCateringsEntitiesByClient(clientsEntity);
     }
 }

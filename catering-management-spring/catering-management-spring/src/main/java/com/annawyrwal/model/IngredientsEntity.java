@@ -13,6 +13,7 @@ public class IngredientsEntity {
     private DishesEntity dishesByDishid;
 
     @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name = "id")
     public int getId() {
         return id;

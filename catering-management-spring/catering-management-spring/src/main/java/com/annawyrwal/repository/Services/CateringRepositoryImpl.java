@@ -1,6 +1,7 @@
 package com.annawyrwal.repository.Services;
 
 import com.annawyrwal.model.CateringsEntity;
+import com.annawyrwal.model.ClientsEntity;
 import com.annawyrwal.model.ContactDataEntity;
 import com.annawyrwal.repository.Interfaces.CateringRepository;
 import org.hibernate.Criteria;
@@ -61,5 +62,12 @@ public class CateringRepositoryImpl implements CateringRepository {
     @Override
     public void addCateringEntity(CateringsEntity cateringsEntity) {
         getCurrentSession().saveOrUpdate(cateringsEntity);
+    }
+
+    @Override
+    public List<CateringsEntity> getCateringsEntitiesByClient(ClientsEntity clientsEntity) {
+        Criteria criteriaQuery = getCurrentSession().createCriteria(CateringsEntity.class);
+        criteriaQuery.add(Restrictions.eq("clientsByClientid", clientsEntity));
+        return (List<CateringsEntity>) criteriaQuery.list();
     }
 }

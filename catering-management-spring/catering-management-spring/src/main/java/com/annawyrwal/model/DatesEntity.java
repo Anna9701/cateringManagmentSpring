@@ -12,6 +12,7 @@ public class DatesEntity {
     private Date endTime;
 
     @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name = "id")
     public int getId() {
         return id;

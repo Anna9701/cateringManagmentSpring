@@ -11,6 +11,7 @@ public class DishOrdersEntity {
     private Boolean takeaway;
 
     @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name = "orderid")
     public int getOrderid() {
         return orderid;
