@@ -22,10 +22,10 @@
                 <th scope="col">Amount of people</th>
                 <th scope="col">PayedUp</th>
                 <th scope="col">Invoice</th>
-                <th scope="col">Places</th>
-                <th scope="col">Dates</th>
                 <th scope="col"></th>
                 <th scope="col"></th>
+                <th scope="col"></th>
+                <th class="text-right" scope="colgroup"></th>
             </tr>
             </thead>
             <tbody>
@@ -36,15 +36,16 @@
                 <td th:text="${order.payedUp}"></td>
                 <td th:text="${order.invoice}"></td>
                 <td>
-                    <a th:href="@{/catering/catering/details/__${catering.id}__}"><button class="btn btn-info">Places</button></a>
+                    <a th:href="@{/catering/orders/place/__${order.getPlacesByPlaceid().getId()}__}"><span>Place</span></a>
                 </td>
                 <td>
-                    <a th:href="@{/catering/catering/details/__${catering.id}__}"><button class="btn btn-info">Dates</button></a>
+                    <a th:href="@{/catering/orders/date/__${order.getDatesByDateid().getId()}__}"><span>Date</span></a>
                 </td>
                 <td>
-                    <a th:href="@{/catering/catering/details/__${catering.id}__}"><button class="btn btn-info">Details</button></a>
+                    <a th:href="@{/catering/orders/date/__${order.getDatesByDateid().getId()}__}"><span>Dishes</span></a>
                 </td>
-                <td>
+                <td class="text-right">
+                    <a th:href="@{/catering/catering/details/__${catering.id}__}"><button class="btn btn-info">Edit</button></a>
                     <a th:href="@{/catering/orders/delete/__${order.id}__}"><button class="btn btn-danger">Remove</button></a>
                 </td>
             </tr>

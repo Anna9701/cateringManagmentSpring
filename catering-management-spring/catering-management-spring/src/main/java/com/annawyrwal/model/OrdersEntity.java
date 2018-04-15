@@ -90,7 +90,7 @@ public class OrdersEntity {
         return Objects.hash(id, amountOfPeople, cost, invoice, payedUp);
     }
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "cateringid", referencedColumnName = "id", nullable = false)
     public CateringsEntity getCateringsByCateringid() {
         return cateringsByCateringid;
@@ -100,7 +100,7 @@ public class OrdersEntity {
         this.cateringsByCateringid = cateringsByCateringid;
     }
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "clientid", referencedColumnName = "id", nullable = false)
     public ClientsEntity getClientsByClientid() {
         return clientsByClientid;
@@ -110,7 +110,7 @@ public class OrdersEntity {
         this.clientsByClientid = clientsByClientid;
     }
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "placeid", referencedColumnName = "id", nullable = true)
     public PlacesEntity getPlacesByPlaceid() {
         return placesByPlaceid;
@@ -120,7 +120,7 @@ public class OrdersEntity {
         this.placesByPlaceid = placesByPlaceid;
     }
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "dateid", referencedColumnName = "id", nullable = true)
     public DatesEntity getDatesByDateid() {
         return datesByDateid;

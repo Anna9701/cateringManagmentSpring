@@ -9,7 +9,7 @@ public class PlacesEntity {
     private int id;
     private String address;
     private String postalCode;
-    private int floor;
+    private Integer floor;
     private Integer hallNumber;
     private ClientsEntity clientsByClientid;
 
@@ -46,11 +46,11 @@ public class PlacesEntity {
 
     @Basic
     @Column(name = "floor")
-    public int getFloor() {
+    public Integer getFloor() {
         return floor;
     }
 
-    public void setFloor(int floor) {
+    public void setFloor(Integer floor) {
         this.floor = floor;
     }
 
