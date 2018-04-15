@@ -1,4 +1,4 @@
-package com.annawyrwal.Controller;
+package com.annawyrwal.Controller.Account;
 
 import com.annawyrwal.model.User;
 import com.annawyrwal.Service.Authentication.EmailService;
