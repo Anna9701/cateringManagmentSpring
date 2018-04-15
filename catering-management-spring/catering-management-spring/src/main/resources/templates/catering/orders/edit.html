@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Date</title>
+    <title>Order</title>
     <title th:replace="fragments/header :: headStyles"></title>
 </head>
 <body>
@@ -10,35 +10,34 @@
 <!-- Page content -->
 <div class="w3-content" style="max-width:2000px;margin-top:60px">
 
-    <h1 class="text-center">Date</h1>
-
-
+    <h1 class="text-center">Order</h1>
 
     <div class="main-login main-center">
 
-        <form autocomplete="off" action="/catering/orders/date/" th:action="@{/catering/orders/date}" method="post"
-              th:object="${date}" class="m-t" role="form">
+        <form autocomplete="off" action="/catering/orders/edit/" th:action="@{/catering/orders/edit}" method="post"
+              th:object="${order}" class="m-t" role="form">
 
-            <input type="hidden" th:field="${date.id}"/>
+            <input type="hidden" th:field="${order.id}"/>
+
+            <input type="hidden" th:field="${order.cateringId}"/>
 
             <div class="form-group">
-                <label for="startTime" class="cols-sm-2 control-label">Start time</label>
+                <label for="amountOfPeople" class="cols-sm-2 control-label">Amount of people</label>
                 <div class="cols-sm-10">
                     <div class="input-group">
-                        <span class="input-group-addon"><i class="fas fa-book" aria-hidden="true"></i></span>
-                        <input type="text" th:object="${date}"  th:field="${date.startTime}"
-                               placeholder="yyyy-mm-dd hh:mm:ss" id="startTime" class="form-control inputField"/>
+                        <span class="input-group-addon"><i class="fas fa-users" aria-hidden="true"></i></span>
+                        <input type="number"  th:field="${order.amountOfPeople}"
+                               placeholder="amountOfPeople" id="amountOfPeople" class="form-control inputField"/>
                     </div>
                 </div>
             </div>
 
             <div class="form-group">
-                <label for="endTime" class="cols-sm-2 control-label">End time</label>
                 <div class="cols-sm-10">
                     <div class="input-group">
-                        <span class="input-group-addon"><i class="fas fa-book" aria-hidden="true"></i></span>
-                        <input type="text" th:object="${date}"  th:field="${date.endTime}"
-                               placeholder="yyyy-mm-dd hh:mm:ss" id="endTime" class="form-control inputField"/>
+                        <label for="invoice">Invoice</label>
+                        <input type="checkbox"  th:field="${order.invoice}"
+                               placeholder="invoice" id="invoice" class="form-control inputField"/>
                     </div>
                 </div>
             </div>

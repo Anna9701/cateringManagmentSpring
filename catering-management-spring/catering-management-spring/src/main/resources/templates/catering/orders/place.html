@@ -13,7 +13,7 @@
     <h1 class="text-center">Place</h1>
 
     <div class="main-login main-center">
-        <button class="btn btn-default">Back</button>
+
         <form autocomplete="off" action="/catering/orders/place/" th:action="@{/catering/orders/place}" method="post"
               th:object="${place}" class="m-t" role="form">
 
@@ -64,6 +64,7 @@
             </div>
 
             <button type="submit" class="btn btn-primary block full-width m-b text-center">Update</button>
+            <button class="btn btn-default">Back</button>
         </form>
     </div>
 </div>

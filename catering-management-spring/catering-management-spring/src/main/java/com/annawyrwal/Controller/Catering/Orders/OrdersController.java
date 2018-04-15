@@ -81,6 +81,26 @@ public class OrdersController {
         return modelAndView;
     }
 
+    @RequestMapping(value="/catering/orders/edit/{orderId}", method = RequestMethod.GET)
+    public ModelAndView updateOrder(ModelAndView modelAndView, @PathVariable int orderId) {
+        modelAndView.setViewName("catering/orders/edit");
+        OrdersEntity ordersEntity = orderEntityService.getOrderEntity(orderId);
+        modelAndView.addObject("order", ordersEntity);
+        return modelAndView;
+    }
+
+    @RequestMapping(value="/catering/orders/edit", method = RequestMethod.POST)
+    public String updateOrder(ModelAndView modelAndView,
+                                          OrdersEntity orderEntity,
+                                          BindingResult bindingResult,
+                                          HttpServletRequest request) {
+        modelAndView.setViewName("catering/orders/edit");
+
+        orderEntityService.updateOrderEntity(orderEntity);
+
+        return "redirect:/catering/" + orderEntity.getCateringId() + "/orders/orders";
+    }
+
     @RequestMapping(value="/catering/orders/create", method = RequestMethod.POST)
     public String processRegistrationForm(ModelAndView modelAndView,
                                           OrdersEntity orderEntity,
