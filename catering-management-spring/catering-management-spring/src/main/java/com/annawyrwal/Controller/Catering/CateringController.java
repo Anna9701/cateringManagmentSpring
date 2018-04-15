@@ -1,4 +1,4 @@
-package com.annawyrwal.Controller;
+package com.annawyrwal.Controller.Catering;
 
 import com.annawyrwal.Service.Authentication.MyUserPrincipal;
 import com.annawyrwal.Service.Interfaces.CateringEntityService;
@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,15 +50,6 @@ public class CateringController {
     @RequestMapping(value="/catering/catering/delete/{id}", method = RequestMethod.GET)
     public String deleteCatering(@PathVariable int id) {
         cateringEntityService.deleteCateringEntity(id);
-        return "redirect:/catering/catering";
-    }
-
-    @RequestMapping(value="/catering/catering/create/{clientId}", method = RequestMethod.GET)
-    public String createCatering (@PathVariable int clientId) {
-        CateringsEntity cateringsEntity = new CateringsEntity();
-        cateringsEntity.setClientsByClientid(clientEntityService.getClient(clientId));
-        cateringsEntity.setName("Test");
-        cateringEntityService.addCateringEntity(cateringsEntity);
         return "redirect:/catering/catering";
     }
 }

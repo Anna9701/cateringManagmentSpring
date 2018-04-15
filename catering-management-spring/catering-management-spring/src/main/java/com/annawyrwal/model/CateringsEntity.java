@@ -10,6 +10,9 @@ public class CateringsEntity {
     private String name;
     private ClientsEntity clientsByClientid;
 
+    @Transient
+    private int clientId;
+
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name = "id")
@@ -54,5 +57,15 @@ public class CateringsEntity {
 
     public void setClientsByClientid(ClientsEntity clientsByClientid) {
         this.clientsByClientid = clientsByClientid;
+    }
+
+    @Transient
+    public int getClientId() {
+        return clientId;
+    }
+
+    @Transient
+    public void setClientId(int clientId) {
+        this.clientId = clientId;
     }
 }
