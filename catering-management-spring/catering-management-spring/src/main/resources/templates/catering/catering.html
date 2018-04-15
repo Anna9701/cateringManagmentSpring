@@ -10,34 +10,33 @@
 <div th:replace="fragments/header :: smallScreensNavBar"></div>
 
 <!-- Page content -->
-<div class="w3-content" style="max-width:2000px;margin-top:46px">
+<div class="w3-content" style="max-width:2000px;margin-top:60px">
 
+    <h1 class="text-center">Caterings</h1>
     <br/>
     <div class="container-fluid">
         <a th:href="@{/catering/create/__${client.id}__}"><button class="btn btn-primary">Create</button></a>
 
-        <table class="table table-dark">
+        <table class="table table-striped">
             <thead>
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Name</th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
+                    <th scope="colgroup"></th>
                 </tr>
             </thead>
             <tbody>
                 <tr th:each="catering : ${cateringsList.pageList}">
                     <td th:text="${catering.id}"></td>
                     <td th:text="${catering.name}"></td>
-                    <td>
-                        <a th:href="@{/catering/catering/details/__${catering.id}__}"><button class="btn btn-info">Details</button></a>
-                    </td>
-                    <td>
+                    <td class="text-right">
+                        <a th:href="@{/catering/__${catering.id}__/orders/orders}"><button class="btn btn-info">Details</button></a>
                         <a th:href="@{/catering/catering/delete/__${catering.id}__}"><button class="btn btn-danger">Remove</button></a>
                     </td>
                 </tr>
             </tbody>
         </table>
+        <span>Page: </span>
         <a th:if="${!cateringsList.firstPage}"
            th:href="@{/catering/catering/__${cateringsList.page - 1}__}">Previous</a>
         <span th:text="${cateringsList.page + 1}">1 / 10</span>

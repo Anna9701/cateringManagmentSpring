@@ -8,8 +8,55 @@
 <div th:replace="fragments/header :: normalNavBar"></div>
 <div th:replace="fragments/header :: smallScreensNavBar"></div>
 <!-- Page content -->
-<div class="w3-content" style="max-width:2000px;margin-top:46px">
+<div class="w3-content" style="max-width:2000px;margin-top:60px">
+    <h1 class="text-center">Orders</h1>
+    <div class="container-fluid">
+        <a th:href="@{/catering/catering/}"><button class="btn btn-default">Back</button></a>
+        <a th:href="@{/catering/orders/create/__${catering.id}__}"><button class="btn btn-primary">Create</button></a>
 
+        <table class="table table-dark">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Cost</th>
+                <th scope="col">Amount of people</th>
+                <th scope="col">PayedUp</th>
+                <th scope="col">Invoice</th>
+                <th scope="col">Places</th>
+                <th scope="col">Dates</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="order : ${ordersList.pageList}">
+                <td th:text="${order.id}"></td>
+                <td th:text="${order.cost}"></td>
+                <td th:text="${order.amountOfPeople}"></td>
+                <td th:text="${order.payedUp}"></td>
+                <td th:text="${order.invoice}"></td>
+                <td>
+                    <a th:href="@{/catering/catering/details/__${catering.id}__}"><button class="btn btn-info">Places</button></a>
+                </td>
+                <td>
+                    <a th:href="@{/catering/catering/details/__${catering.id}__}"><button class="btn btn-info">Dates</button></a>
+                </td>
+                <td>
+                    <a th:href="@{/catering/catering/details/__${catering.id}__}"><button class="btn btn-info">Details</button></a>
+                </td>
+                <td>
+                    <a th:href="@{/catering/orders/delete/__${order.id}__}"><button class="btn btn-danger">Remove</button></a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <a th:if="${!ordersList.firstPage}"
+           th:href="@{/catering/__${catering.id}__/orders/orders/__${ordersList.page - 1}__}">Previous</a>
+        <span th:text="${ordersList.page + 1}">1 / 10</span>
+        <a th:if="${!ordersList.lastPage}"
+           th:href="@{/catering/__${catering.id}__/orders/orders/__${ordersList.page + 1}__}">Next</a>
+
+    </div>
 </div>
 <!-- End Page Content -->
 <div th:replace="fragments/footer :: footer"></div>

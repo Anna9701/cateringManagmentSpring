@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>405 - Not Allowed</title>
+    <title th:replace="fragments/header :: headStyles"></title>
+</head>
+<body>
+<div th:replace="fragments/header :: normalNavBar"></div>
+<div th:replace="fragments/header :: smallScreensNavBar"></div>
+
+<!-- Page content -->
+<div class="w3-content text-center alert alert-danger" style="max-width:2000px;margin-top:46px">
+    <h3>Method Not Allowed Exception</h3>
+    <div>
+        <p class="error" th:text="${errorMsg}">Error</p>
+    </div>
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+<div th:replace="fragments/footer :: scripts"></div>
+</body>
+</html>

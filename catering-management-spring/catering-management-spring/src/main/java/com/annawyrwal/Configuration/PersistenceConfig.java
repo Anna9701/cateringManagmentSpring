@@ -47,7 +47,6 @@ public class PersistenceConfig {
         sessionFactory.setPackagesToScan(
                 new String[] { "com.annawyrwal.model" });
         sessionFactory.setHibernateProperties(hibernateProperties());
-
         return sessionFactory;
     }
 

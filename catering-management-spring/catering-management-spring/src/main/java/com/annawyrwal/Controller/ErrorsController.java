@@ -25,4 +25,16 @@ public class ErrorsController {
         modelAndView.setViewName("error/400");
         return modelAndView;
     }
+
+    @RequestMapping(value="/error/405", method = RequestMethod.GET)
+    public ModelAndView show405Page(ModelAndView modelAndView){
+        modelAndView.setViewName("error/405");
+        return modelAndView;
+    }
+
+    @RequestMapping(value="/error/500", method = RequestMethod.GET)
+    public ModelAndView show500Page(ModelAndView modelAndView){
+        modelAndView.setViewName("error/500");
+        return modelAndView;
+    }
 }

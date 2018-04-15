@@ -1,5 +1,7 @@
 package com.annawyrwal.model;
 
+import org.hibernate.annotations.ColumnDefault;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -7,15 +9,17 @@ import java.util.Objects;
 @Table(name = "orders", schema = "public", catalog = "catering")
 public class OrdersEntity {
     private int id;
-    private int priority;
     private int amountOfPeople;
-    private float cost;
-    private boolean invoice;
-    private boolean payedUp;
+    private float cost = 0;
+    private boolean invoice = true;
+    private boolean payedUp = false;
     private CateringsEntity cateringsByCateringid;
     private ClientsEntity clientsByClientid;
     private PlacesEntity placesByPlaceid;
     private DatesEntity datesByDateid;
+
+    @Transient
+    private int cateringId;
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -29,16 +33,6 @@ public class OrdersEntity {
     }
 
     @Basic
-    @Column(name = "priority")
-    public int getPriority() {
-        return priority;
-    }
-
-    public void setPriority(int priority) {
-        this.priority = priority;
-    }
-
-    @Basic
     @Column(name = "amount_of_people")
     public int getAmountOfPeople() {
         return amountOfPeople;
@@ -49,7 +43,7 @@ public class OrdersEntity {
     }
 
     @Basic
-    @Column(name = "cost")
+    @Column(name = "cost", nullable = false)
     public float getCost() {
         return cost;
     }
@@ -59,7 +53,7 @@ public class OrdersEntity {
     }
 
     @Basic
-    @Column(name = "invoice")
+    @Column(name = "invoice", nullable = false)
     public boolean isInvoice() {
         return invoice;
     }
@@ -84,7 +78,6 @@ public class OrdersEntity {
         if (o == null || getClass() != o.getClass()) return false;
         OrdersEntity that = (OrdersEntity) o;
         return id == that.id &&
-                priority == that.priority &&
                 amountOfPeople == that.amountOfPeople &&
                 Float.compare(that.cost, cost) == 0 &&
                 invoice == that.invoice &&
@@ -94,7 +87,7 @@ public class OrdersEntity {
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, priority, amountOfPeople, cost, invoice, payedUp);
+        return Objects.hash(id, amountOfPeople, cost, invoice, payedUp);
     }
 
     @ManyToOne
@@ -118,7 +111,7 @@ public class OrdersEntity {
     }
 
     @ManyToOne
-    @JoinColumn(name = "placeid", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "placeid", referencedColumnName = "id", nullable = true)
     public PlacesEntity getPlacesByPlaceid() {
         return placesByPlaceid;
     }
@@ -128,12 +121,22 @@ public class OrdersEntity {
     }
 
     @ManyToOne
-    @JoinColumn(name = "dateid", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "dateid", referencedColumnName = "id", nullable = true)
     public DatesEntity getDatesByDateid() {
         return datesByDateid;
     }
 
     public void setDatesByDateid(DatesEntity datesByDateid) {
         this.datesByDateid = datesByDateid;
+    }
+
+    @Transient
+    public int getCateringId() {
+        return cateringId;
+    }
+
+    @Transient
+    public void setCateringId(int cateringId) {
+        this.cateringId = cateringId;
     }
 }

@@ -36,7 +36,7 @@ public class OrdersRepositoryImpl implements OrdersRepository {
 
     @Override
     public void deleteOrderEntity(Integer orderId) {
-        getCurrentSession().delete(orderId);
+        getCurrentSession().delete(getOrderEntity(orderId));
     }
 
     @Override

@@ -1,15 +1,22 @@
 package com.annawyrwal.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
-import java.sql.Date;
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
 @Table(name = "dates", schema = "public", catalog = "catering")
 public class DatesEntity {
     private int id;
-    private Date startTime;
-    private Date endTime;
+    @DateTimeFormat(pattern = "yyyy-mm-dd hh:mm:ss")
+    private Date startTime = new Date();
+    @DateTimeFormat(pattern = "yyyy-mm-dd hh:mm:ss")
+    private Date endTime = new Date();
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -22,8 +29,8 @@ public class DatesEntity {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "start_time")
+
+    @Column(name = "start_time", columnDefinition = "TIMESTAMP")
     public Date getStartTime() {
         return startTime;
     }
@@ -32,8 +39,8 @@ public class DatesEntity {
         this.startTime = startTime;
     }
 
-    @Basic
-    @Column(name = "end_time")
+
+    @Column(name = "end_time", columnDefinition = "TIMESTAMP")
     public Date getEndTime() {
         return endTime;
     }
