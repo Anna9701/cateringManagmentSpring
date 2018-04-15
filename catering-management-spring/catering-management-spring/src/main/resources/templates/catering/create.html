@@ -3,100 +3,16 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
-        <title th:text="Create">Create Catering</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <!-- Bootstrap core CSS -->
-        <link
-                href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-                rel="stylesheet"
-                integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-                crossorigin="anonymous"/>
-
-        <style>
-            hr{
-                width: 10%;
-                color: #fff;
-            }
-
-            .form-group{
-                margin-bottom: 15px;
-            }
-
-            label{
-                margin-bottom: 15px;
-            }
-
-            .inputField,
-            input::-webkit-input-placeholder {
-                font-size: 11px;
-                padding-top: 3px;
-            }
-
-            .main-login{
-                background-color: #d3d3d3;
-                /* shadows and rounded borders */
-                -moz-border-radius: 2px;
-                -webkit-border-radius: 2px;
-                border-radius: 2px;
-                -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-                -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-                box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-
-            }
-
-            .main-center{
-                margin-top: 30px;
-                margin: 0 auto;
-                max-width: 330px;
-                padding: 40px 40px;
-
-            }
-
-        </style>
+    <title>Create Catering</title>
+    <title th:replace="fragments/header :: headStyles"></title>
 </head>
 <body>
-<!-- Navbar -->
-<div class="w3-top">
-    <div class="w3-bar w3-black w3-card">
-        <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
-        <a href="/index" class="w3-bar-item w3-button w3-padding-large">HOME</a>
-        <a href="/catering/catering" class="w3-bar-item w3-button w3-padding-large w3-hide-small">CATERINGS</a>
-        <a href="#" class="w3-bar-item w3-button w3-padding-large w3-hide-small">X</a>
-        <a href="#" class="w3-bar-item w3-button w3-padding-large w3-hide-small">X</a>
-        <div class="w3-dropdown-hover w3-hide-small">
-            <button class="w3-padding-large w3-button" title="More">X <i class="fa fa-caret-down"></i></button>
-            <div class="w3-dropdown-content w3-bar-block w3-card-4">
-                <a href="#" class="w3-bar-item w3-button">X</a>
-                <a href="#" class="w3-bar-item w3-button">X</a>
-                <a href="#" class="w3-bar-item w3-button">X</a>
-            </div>
-        </div>
-        <form  sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
-            <input value="Sign out" class="w3-bar-item w3-button w3-hide-small w3-right" type="submit"/>
-        </form>
-        <a href="/adminPanel" sec:authorize="hasAuthority('ADMIN')" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">Hello  <span sec:authentication="name"></span></a>
-        <a href="/account" sec:authorize="hasAuthority('USER')" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">Hello  <span sec:authentication="name"></span></a>
-        <a sec:authorize="isAnonymous()" href="/login" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">Login</a>
-        <a sec:authorize="isAnonymous()" href="/register" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">Register</a>
-        <a href="javascript:void(0)" class="w3-padding-large w3-hover-red w3-hide-small w3-right"><i
-                class="fa fa-search"></i></a>
-    </div>
-</div>
+<div th:replace="fragments/header :: normalNavBar"></div>
+<div th:replace="fragments/header :: smallScreensNavBar"></div>
 
-<!-- Navbar on small screens -->
-<div id="navDemo" class="w3-bar-block w3-black w3-hide w3-hide-large w3-hide-medium w3-top" style="margin-top:46px">
-    <a href="/index" class="w3-bar-item w3-button w3-padding-large">INDEX</a>
-    <a href="/catering/catering" class="w3-bar-item w3-button w3-padding-large">CATERINGS</a>
-    <a href="#contact" class="w3-bar-item w3-button w3-padding-large">X</a>
-    <a href="#" class="w3-bar-item w3-button w3-padding-large">X</a>
-</div>
-
+<!-- Page content -->
 <div class="w3-content" style="max-width:2000px;margin-top:46px">
-    <!-- Page content -->
+
     <div class="main-login main-center">
         <form autocomplete="off" action="/catering/create" th:action="@{/catering/create}" method="post"
               th:object="${catering}" class="m-t" role="form">
@@ -112,39 +28,14 @@
                     </div>
                 </div>
             </div>
-            <button type="submit"
-                    class="btn btn-primary block full-width m-b">Create
-            </button>
+
+            <button type="submit" class="btn btn-primary block full-width m-b">Create</button>
         </form>
     </div>
-    <!-- End Page Content -->
+
 </div>
-<div class="container">
-    <!-- Footer -->
-    <footer class="w3-container w3-padding-64 w3-center w3-opacity w3-xlarge">
-        <p class="w3-medium">Powered by <a href="#" target="_blank">Anna Wyrwal</a></p>
-        <p class="w3-medium">© 2018 <a href="#" target="_blank">Lodz University of Technology</a></p>
-    </footer>
-</div>
-
-<span sec:authorize="isAuthenticated()">
-                | Logged user: <span sec:authentication="name"></span> |
-                Roles: <span sec:authentication="principal.authorities"></span> |
-
-</span>
-
-<!-- jQuery-->
-<script
-        src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-
-<!-- Bootstrap -->
-<script
-        src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-        crossorigin="anonymous"></script>
-
-<!-- Bootstrap Validator plugin -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
-
+<!-- End Page Content -->
+<div th:replace="fragments/footer :: footer"></div>
+<div th:replace="fragments/footer :: scripts"></div>
 </body>
 </html>
