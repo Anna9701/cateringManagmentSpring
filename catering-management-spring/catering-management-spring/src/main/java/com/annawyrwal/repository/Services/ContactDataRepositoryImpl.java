@@ -40,7 +40,7 @@ public class ContactDataRepositoryImpl implements ContactDataRepository {
     @SuppressWarnings("unchecked")
     @Override
     public List<ContactDataEntity> getAllContactDataEntities() {
-        return getCurrentSession().createQuery("from contact_data").list();
+        return getCurrentSession().createQuery("from ContactDataEntity").list();
     }
 
     @Override

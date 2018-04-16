@@ -41,7 +41,7 @@ public class ClientRepositoryImpl implements ClientRepository {
     @SuppressWarnings("unchecked")
     @Override
     public List<ClientsEntity> getAllClientsEntities() {
-        return getCurrentSession().createQuery("from contact_data").list();
+        return getCurrentSession().createQuery("from ClientsEntity").list();
     }
 
     @Override

@@ -42,7 +42,7 @@ public class CateringRepositoryImpl implements CateringRepository {
 
     @Override
     public List<CateringsEntity> getAllCateringsEntities() {
-        return getCurrentSession().createQuery("from caterings").list();
+        return getCurrentSession().createQuery("from CateringsEntity").list();
     }
 
     @Override

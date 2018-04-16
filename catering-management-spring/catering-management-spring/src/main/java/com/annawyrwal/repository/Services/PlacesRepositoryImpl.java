@@ -32,7 +32,7 @@ public class PlacesRepositoryImpl implements PlacesRepository {
 
     @Override
     public List<PlacesEntity> getAllPlaceEntity() {
-        return getCurrentSession().createQuery("from places").list();
+        return getCurrentSession().createQuery("from PlacesEntity").list();
     }
 
     @Override

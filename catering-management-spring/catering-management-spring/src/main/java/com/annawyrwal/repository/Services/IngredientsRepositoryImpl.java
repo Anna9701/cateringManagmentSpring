@@ -33,7 +33,7 @@ public class IngredientsRepositoryImpl implements IngredientsRepository {
 
     @Override
     public List<IngredientsEntity> getAllIngredientsEntity() {
-        return getCurrentSession().createQuery("from ingredients").list();
+        return getCurrentSession().createQuery("from IngredientsEntity").list();
     }
 
     @Override

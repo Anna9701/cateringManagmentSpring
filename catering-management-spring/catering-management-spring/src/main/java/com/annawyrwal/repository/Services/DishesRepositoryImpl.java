@@ -31,7 +31,7 @@ public class DishesRepositoryImpl implements DishesRepository {
 
     @Override
     public List<DishesEntity> getAllDishEntities() {
-        return getCurrentSession().createQuery("from dishes").list();
+        return getCurrentSession().createQuery("from DishesEntity").list();
     }
 
     @Override

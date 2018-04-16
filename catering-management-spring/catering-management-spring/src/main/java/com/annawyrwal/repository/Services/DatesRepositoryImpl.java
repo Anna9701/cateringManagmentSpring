@@ -29,7 +29,7 @@ public class DatesRepositoryImpl implements DatesRepository {
 
     @Override
     public List<DatesEntity> getAllDatesEntities() {
-        return getCurrentSession().createQuery("from dates").list();
+        return getCurrentSession().createQuery("from DatesEntity").list();
     }
 
     @Override

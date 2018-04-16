@@ -2,6 +2,8 @@ package com.annawyrwal.Service.Implementations;
 
 import com.annawyrwal.Service.Interfaces.DishOrderEntityService;
 import com.annawyrwal.model.DishOrdersEntity;
+import com.annawyrwal.model.DishesEntity;
+import com.annawyrwal.model.OrdersEntity;
 import com.annawyrwal.repository.Interfaces.DishOrdersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,19 +47,24 @@ public class DishOrderEntityServiceImpl implements DishOrderEntityService {
 
     @Transactional
     @Override
-    public List<DishOrdersEntity> getDishOrderEntityByOrder(int orderId) {
-        return dishOrdersRepository.getDishOrderEntityByOrder(orderId);
+    public List<DishOrdersEntity> getDishOrderEntityByOrder(OrdersEntity order) {
+        return dishOrdersRepository.getDishOrderEntityByOrder(order);
     }
 
     @Transactional
     @Override
-    public List<DishOrdersEntity> getDishOrderEntityByDish(int dishId) {
-        return dishOrdersRepository.getDishOrderEntityByDish(dishId);
+    public List<DishOrdersEntity> getDishOrderEntityByDish(DishesEntity dish) {
+        return dishOrdersRepository.getDishOrderEntityByDish(dish);
     }
 
     @Transactional
     @Override
-    public DishOrdersEntity getDishOrderEntity(int orderId, int dishId) {
-        return dishOrdersRepository.getDishOrderEntity(orderId, dishId);
+    public DishOrdersEntity getDishOrderEntity(OrdersEntity order, DishesEntity dish) {
+        return dishOrdersRepository.getDishOrderEntity(order, dish);
+    }
+
+    @Override
+    public DishOrdersEntity getDishOrderEntity(int dishOrderId) {
+        return dishOrdersRepository.getDishOrderEntity(dishOrderId);
     }
 }

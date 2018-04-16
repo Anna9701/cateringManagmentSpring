@@ -42,7 +42,7 @@
                     <a th:href="@{/catering/orders/date/__${order.getDatesByDateid().getId()}__}"><span>Date</span></a>
                 </td>
                 <td>
-                    <a th:href="@{/catering/orders/date/__${order.getDatesByDateid().getId()}__}"><span>Dishes</span></a>
+                    <a th:href="@{/catering/orders/__${order.id}__/dishes}"><span>Dishes</span></a>
                 </td>
                 <td class="text-right">
                     <a th:href="@{/catering/orders/edit/__${order.id}__}"><button class="btn btn-info">Edit</button></a>

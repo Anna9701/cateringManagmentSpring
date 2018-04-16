@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Create dish order</title>
+    <title th:replace="fragments/header :: headStyles"></title>
+</head>
+<body>
+<div th:replace="fragments/header :: normalNavBar"></div>
+<div th:replace="fragments/header :: smallScreensNavBar"></div>
+<!-- Page content -->
+<div class="w3-content" style="max-width:2000px;margin-top:60px">
+
+    <h1 class="text-center">Create Dish Order</h1>
+    <div class="main-login main-center m-t">
+        <form autocomplete="off" action="/catering/orders/dishes/create" th:action="@{/catering/orders/dishes/create}" method="post"
+              th:object="${dishOrder}" role="form">
+
+            <input type="hidden" th:field="${dishOrder.orderId}"/>
+
+            <div class="form-group">
+                <label for="dishId" class="cols-sm-2 control-label">Dish name</label>
+                <div class="cols-sm-10">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fas fa-users" aria-hidden="true"></i></span>
+                        <select th:field="${dishOrder.dishId}" id="dishId" class="form-control">
+                            <option th:each="dish : ${dishesList}" th:value="${dish.id}" th:text="${dish.name}"></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary block full-width m-b text-center">Add</button>
+        </form> <br/>
+        <a class="text-center" th:href="@{/catering/orders/__${orderId}__/dishes}"><button class="btn btn-default block full-width m-b text-center">Back</button></a>
+    </div>
+
+</div>
+<!-- End Page Content -->
+<div th:replace="fragments/footer :: footer"></div>
+<div th:replace="fragments/footer :: scripts"></div>
+</body>
+</html>

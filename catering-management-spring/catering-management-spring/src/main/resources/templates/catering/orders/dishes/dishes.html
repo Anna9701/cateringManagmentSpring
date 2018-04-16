@@ -9,53 +9,40 @@
 <div th:replace="fragments/header :: smallScreensNavBar"></div>
 <!-- Page content -->
 <div class="w3-content" style="max-width:2000px;margin-top:60px">
-    <h1 class="text-center">Orders</h1>
+    <h1 class="text-center">Ordered Dishes</h1>
     <div class="container-fluid">
-        <a th:href="@{/catering/catering/}"><button class="btn btn-default">Back</button></a>
-        <a th:href="@{/catering/orders/create/__${catering.id}__}"><button class="btn btn-primary">Create</button></a>
+        <a th:href="@{/catering/__${cateringId}__/orders/orders}"><button class="btn btn-default">Back</button></a>
+        <a th:href="@{/catering/orders/dishes/create/__${orderId}__}"><button class="btn btn-primary">Create</button></a>
 
         <table class="table table-dark">
             <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Cost</th>
-                <th scope="col">Amount of people</th>
-                <th scope="col">PayedUp</th>
-                <th scope="col">Invoice</th>
-                <th scope="col"></th>
-                <th scope="col"></th>
+                <th scope="col">Takeaway</th>
+                <th scope="col">Dish name</th>
                 <th scope="col"></th>
                 <th class="text-right" scope="colgroup"></th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="order : ${ordersList.pageList}">
-                <td th:text="${order.id}"></td>
-                <td th:text="${order.cost}"></td>
-                <td th:text="${order.amountOfPeople}"></td>
-                <td th:text="${order.payedUp}"></td>
-                <td th:text="${order.invoice}"></td>
+            <tr th:each="dishOrder : ${dishOrdersList.pageList}">
+                <td th:text="${dishOrder.id}"></td>
+                <td th:text="${dishOrder.takeaway}"></td>
+                <td th:text="${dishOrder.getDishById().getName()}"></td>
                 <td>
-                    <a th:href="@{/catering/orders/place/__${order.getPlacesByPlaceid().getId()}__}"><span>Place</span></a>
-                </td>
-                <td>
-                    <a th:href="@{/catering/orders/date/__${order.getDatesByDateid().getId()}__}"><span>Date</span></a>
-                </td>
-                <td>
-                    <a th:href="@{/catering/orders/date/__${order.getDatesByDateid().getId()}__}"><span>Dishes</span></a>
+                    <a th:href="@{/catering/orders/place/__${dishOrder.getPlacesByPlaceid().getId()}__}"><span>Image</span></a>
                 </td>
                 <td class="text-right">
-                    <a th:href="@{/catering/orders/edit/__${order.id}__}"><button class="btn btn-info">Edit</button></a>
-                    <a th:href="@{/catering/orders/delete/__${order.id}__}"><button class="btn btn-danger">Remove</button></a>
+                    <a th:href="@{/catering/orders/dishes/__${dishOrder.id}__}"><button class="btn btn-danger">Remove</button></a>
                 </td>
             </tr>
             </tbody>
         </table>
-        <a th:if="${!ordersList.firstPage}"
-           th:href="@{/catering/__${catering.id}__/orders/orders/__${ordersList.page - 1}__}">Previous</a>
-        <span th:text="${ordersList.page + 1}">1 / 10</span>
-        <a th:if="${!ordersList.lastPage}"
-           th:href="@{/catering/__${catering.id}__/orders/orders/__${ordersList.page + 1}__}">Next</a>
+        <a th:if="${!dishOrdersList.firstPage}"
+           th:href="@{/catering/orders/__${orderId}__/dishes/__${dishOrdersList.page - 1}__}">Previous</a>
+        <span th:text="${dishOrdersList.page + 1}">1 / 10</span>
+        <a th:if="${!dishOrdersList.lastPage}"
+           th:href="@{/catering/orders/__${orderId}__/dishes/__${dishOrdersList.page + 1}__}">Next</a>
 
     </div>
 </div>

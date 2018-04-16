@@ -31,7 +31,7 @@ public class OrdersRepositoryImpl implements OrdersRepository {
 
     @Override
     public List<OrdersEntity> getAllOrderEntity() {
-        return getCurrentSession().createQuery("from orders").list();
+        return getCurrentSession().createQuery("from OrdersEntity").list();
     }
 
     @Override
