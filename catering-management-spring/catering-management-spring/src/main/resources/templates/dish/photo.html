@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Dish Photo</title>
+    <title th:replace="fragments/header :: headStyles"></title>
+</head>
+<body>
+<div th:replace="fragments/header :: normalNavBar"></div>
+<div th:replace="fragments/header :: smallScreensNavBar"></div>
+<!-- Page content -->
+<div class="w3-content" style="max-width:2000px;margin-top:60px">
+
+    <h1 class="text-center">Dish photo</h1>
+    <div class="main-login main-center m-t">
+        <img th:src="@{/dish/photo/image/__${dish.id}__}" />
+        <a class="text-center" th:href="@{/dish/dishes}"><button class="btn btn-default block full-width m-b text-center">Back</button></a>
+    </div>
+
+</div>
+<!-- End Page Content -->
+<div th:replace="fragments/footer :: footer"></div>
+<div th:replace="fragments/footer :: scripts"></div>
+</body>
+</html>

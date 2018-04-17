@@ -49,7 +49,7 @@ public class DishesEntity {
     }
 
     @Lob
-    @Column(name="dishImage", columnDefinition = "bytea")
+    @Column(name="dishImage")
     public byte[] getImage() {
         return image;
     }

@@ -35,7 +35,10 @@ public class CreateController {
     }
 
     @RequestMapping(value="/catering/create", method = RequestMethod.POST)
-    public String processRegistrationForm(ModelAndView modelAndView, CateringsEntity cateringsEntity, BindingResult bindingResult, HttpServletRequest request) {
+    public String processRegistrationForm(ModelAndView modelAndView,
+                                          CateringsEntity cateringsEntity,
+                                          BindingResult bindingResult,
+                                          HttpServletRequest request) {
         modelAndView.setViewName("catering/create");
         cateringsEntity.setClientsByClientid(clientEntityService.getClient(cateringsEntity.getClientId()));
         cateringEntityService.addCateringEntity(cateringsEntity);

@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <title th:text="Dishes"></title>
+    <title th:replace="fragments/header :: headStyles"></title>
+</head>
+<body>
+<div th:replace="fragments/header :: normalNavBar"></div>
+<div th:replace="fragments/header :: smallScreensNavBar"></div>
+
+<!-- Page content -->
+<div class="w3-content" style="max-width:2000px;margin-top:60px">
+
+    <h1 class="text-center">Dishes</h1>
+    <br/>
+    <div class="container-fluid">
+        <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/dish/create/}"><button class="btn btn-primary">Create</button></a>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col"></th>
+                    <th sec:authorize="hasAuthority('ADMIN')" scope="colgroup"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="dish : ${dishesList.pageList}">
+                    <td th:text="${dish.id}"></td>
+                    <td th:text="${dish.name}"></td>
+                    <td>
+                        <a th:href="@{/dish/photo/__${dish.id}__}"><button class="btn btn-info">Photo</button></a>
+                    </td>
+                    <td sec:authorize="hasAuthority('ADMIN')" class="text-right">
+                        <a th:href="@{/dish/ingredients/__${dish.id}__}"><button class="btn btn-danger">Ingredients</button></a>
+                        <a th:href="@{/dish/edit/__${dish.id}__}"><button class="btn btn-danger">Edit</button></a>
+                        <a th:href="@{/dish/delete/__${dish.id}__}"><button class="btn btn-danger">Remove</button></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <span>Page: </span>
+        <a th:if="${!dishesList.firstPage}"
+           th:href="@{/dish/dishes/__${dishesList.page - 1}__}">Previous</a>
+        <span th:text="${dishesList.page + 1}">1 / 10</span>
+        <a th:if="${!dishesList.lastPage}"
+           th:href="@{/dish/dishes/__${dishesList.page + 1}__}">Next</a>
+
+    </div>
+</div>
+<!-- End Page Content -->
+<div th:replace="fragments/footer :: footer"></div>
+<div th:replace="fragments/footer :: scripts"></div>
+</body>
+</html>

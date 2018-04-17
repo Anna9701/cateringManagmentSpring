@@ -9,7 +9,6 @@ public class IngredientsEntity {
     private int id;
     private float price;
     private String name;
-    private int amountOf;
     private DishesEntity dishesByDishid;
 
     @Id
@@ -43,16 +42,6 @@ public class IngredientsEntity {
         this.name = name;
     }
 
-    @Basic
-    @Column(name = "amount_of")
-    public int getAmountOf() {
-        return amountOf;
-    }
-
-    public void setAmountOf(int amountOf) {
-        this.amountOf = amountOf;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -60,14 +49,13 @@ public class IngredientsEntity {
         IngredientsEntity that = (IngredientsEntity) o;
         return id == that.id &&
                 Float.compare(that.price, price) == 0 &&
-                amountOf == that.amountOf &&
                 Objects.equals(name, that.name);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, price, name, amountOf);
+        return Objects.hash(id, price, name);
     }
 
     @ManyToOne

@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-public class DishesController {
+public class DishOrdersController {
     @Autowired
     private DishOrderEntityService dishOrderEntityService;
 
