@@ -4,57 +4,68 @@ import com.annawyrwal.Service.Interfaces.DishIngredientEntityService;
 import com.annawyrwal.model.DishIngredientsEntity;
 import com.annawyrwal.model.DishesEntity;
 import com.annawyrwal.model.IngredientsEntity;
+import com.annawyrwal.repository.Interfaces.DishIngredientsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Transactional
 @Service
 public class DishIngredientEntityServiceImpl implements DishIngredientEntityService {
-    private DishIngredientEntityService dishIngredientEntityService;
+    private DishIngredientsRepository dishIngredientsRepository;
 
     @Autowired
-    public DishIngredientEntityServiceImpl(DishIngredientEntityService dishIngredientEntityService) {
-        this.dishIngredientEntityService = dishIngredientEntityService;
+    public DishIngredientEntityServiceImpl(DishIngredientsRepository dishIngredientsRepository) {
+        this.dishIngredientsRepository = dishIngredientsRepository;
     }
 
+    @Transactional
     @Override
     public void addDishIngredientEntity(DishIngredientsEntity dishIngredientEntity) {
-        dishIngredientEntityService.addDishIngredientEntity(dishIngredientEntity);
+        dishIngredientsRepository.addDishIngredientEntity(dishIngredientEntity);
     }
 
+    @Transactional
     @Override
     public List<DishIngredientsEntity> getAllDishIngredientsEntities() {
-        return dishIngredientEntityService.getAllDishIngredientsEntities();
+        return dishIngredientsRepository.getAllDishIngredientsEntities();
     }
 
+    @Transactional
     @Override
     public void deleteDishIngredientEntity(Integer dishIngredientId) {
-        dishIngredientEntityService.deleteDishIngredientEntity(dishIngredientId);
+        dishIngredientsRepository.deleteDishIngredientEntity(dishIngredientId);
     }
 
+    @Transactional
     @Override
     public DishIngredientsEntity updateDishIngredientEntity(DishIngredientsEntity dishIngredientEntity) {
-        return dishIngredientEntityService.updateDishIngredientEntity(dishIngredientEntity);
+        return dishIngredientsRepository.updateDishIngredientEntity(dishIngredientEntity);
     }
 
+    @Transactional
     @Override
     public List<DishIngredientsEntity> getDishIngredientEntityByIngredient(IngredientsEntity ingredient) {
-        return dishIngredientEntityService.getDishIngredientEntityByIngredient(ingredient);
+        return dishIngredientsRepository.getDishIngredientEntityByIngredient(ingredient);
     }
 
+    @Transactional
     @Override
     public List<DishIngredientsEntity> getDishIngredientEntityByDish(DishesEntity dish) {
-        return dishIngredientEntityService.getDishIngredientEntityByDish(dish);
+        return dishIngredientsRepository.getDishIngredientEntityByDish(dish);
     }
 
+    @Transactional
     @Override
     public DishIngredientsEntity getDishIngredientEntity(IngredientsEntity ingredient, DishesEntity dish) {
-        return dishIngredientEntityService.getDishIngredientEntity(ingredient, dish);
+        return dishIngredientsRepository.getDishIngredientEntity(ingredient, dish);
     }
 
+    @Transactional
     @Override
     public DishIngredientsEntity getDishIngredientEntity(int dishIngredientId) {
-        return dishIngredientEntityService.getDishIngredientEntity(dishIngredientId);
+        return dishIngredientsRepository.getDishIngredientEntity(dishIngredientId);
     }
 }

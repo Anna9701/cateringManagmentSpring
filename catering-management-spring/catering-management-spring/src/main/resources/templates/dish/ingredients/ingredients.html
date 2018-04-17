@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Ingredients</title>
+    <title th:replace="fragments/header :: headStyles"></title>
+</head>
+<body>
+<div th:replace="fragments/header :: normalNavBar"></div>
+<div th:replace="fragments/header :: smallScreensNavBar"></div>
+<!-- Page content -->
+<div class="w3-content" style="max-width:2000px;margin-top:60px">
+    <h1 class="text-center">Dish Ingredients</h1>
+    <div class="container-fluid">
+        <a th:href="@{/dish/dishes}"><button class="btn btn-default">Back</button></a>
+        <a th:href="@{/dish/ingredients/create/__${dishId}__}"><button class="btn btn-primary">Create</button></a>
+
+        <table class="table table-dark">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Ingredient name</th>
+                <th scope="col">Amount of</th>
+                <th scope="col"></th>
+                <th class="text-right" scope="colgroup"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="dishIngredient : ${dishIngredientsList.pageList}">
+                <td th:text="${dishIngredient.id}"></td>
+                <td th:text="${dishIngredient.getIngredientById().getName()}"></td>
+                <td th:text="${dishIngredient.amountOf}"></td>
+                <td class="text-right">
+                    <a th:href="@{/dish/ingredients/__${dishIngredient.id}__}"><button class="btn btn-danger">Remove</button></a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <a th:if="${!dishIngredientsList.firstPage}"
+           th:href="@{/dish/__${dishId}__/ingredients/__${dishIngredientsList.page - 1}__}">Previous</a>
+        <span th:text="${dishIngredientsList.page + 1}">1 / 10</span>
+        <a th:if="${!dishIngredientsList.lastPage}"
+           th:href="@{/dish/__${dishId}__/ingredients/__${dishIngredientsList.page + 1}__}">Next</a>
+
+    </div>
+</div>
+<!-- End Page Content -->
+<div th:replace="fragments/footer :: footer"></div>
+<div th:replace="fragments/footer :: scripts"></div>
+</body>
+</html>

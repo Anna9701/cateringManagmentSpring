@@ -60,11 +60,11 @@ public class DishIngredientsEntity {
 
     @OneToOne
     @JoinColumn(name = "ingredientid", referencedColumnName = "id", nullable = false)
-    public IngredientsEntity getOrderById() {
+    public IngredientsEntity getIngredientById() {
         return ingredientById;
     }
 
-    public void setOrderById(IngredientsEntity ingredientById) {
+    public void setIngredientById(IngredientsEntity ingredientById) {
         this.ingredientById = ingredientById;
     }
 

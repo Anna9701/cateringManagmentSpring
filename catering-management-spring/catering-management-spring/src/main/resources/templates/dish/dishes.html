@@ -34,7 +34,7 @@
                         <a th:href="@{/dish/photo/__${dish.id}__}"><button class="btn btn-info">Photo</button></a>
                     </td>
                     <td sec:authorize="hasAuthority('ADMIN')" class="text-right">
-                        <a th:href="@{/dish/ingredients/__${dish.id}__}"><button class="btn btn-danger">Ingredients</button></a>
+                        <a th:href="@{/dish/__${dish.id}__/ingredients}"><button class="btn btn-danger">Ingredients</button></a>
                         <a th:href="@{/dish/edit/__${dish.id}__}"><button class="btn btn-danger">Edit</button></a>
                         <a th:href="@{/dish/delete/__${dish.id}__}"><button class="btn btn-danger">Remove</button></a>
                     </td>
