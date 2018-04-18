@@ -9,7 +9,6 @@ public class IngredientsEntity {
     private int id;
     private float price;
     private String name;
-    private DishesEntity dishesByDishid;
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -56,15 +55,5 @@ public class IngredientsEntity {
     public int hashCode() {
 
         return Objects.hash(id, price, name);
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "dishid", referencedColumnName = "id", nullable = false)
-    public DishesEntity getDishesByDishid() {
-        return dishesByDishid;
-    }
-
-    public void setDishesByDishid(DishesEntity dishesByDishid) {
-        this.dishesByDishid = dishesByDishid;
     }
 }

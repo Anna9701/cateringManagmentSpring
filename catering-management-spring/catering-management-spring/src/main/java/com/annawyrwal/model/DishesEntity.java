@@ -1,5 +1,7 @@
 package com.annawyrwal.model;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -48,8 +50,8 @@ public class DishesEntity {
         return Objects.hash(id, name);
     }
 
-    @Lob
     @Column(name="dishImage")
+    @Type(type="org.hibernate.type.BinaryType")
     public byte[] getImage() {
         return image;
     }

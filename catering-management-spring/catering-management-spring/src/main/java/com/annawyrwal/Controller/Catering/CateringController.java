@@ -8,6 +8,8 @@ import com.annawyrwal.model.ClientsEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,19 +32,24 @@ public class CateringController {
     @RequestMapping(value = {"/catering/catering/{page}", "/catering/catering"}, method = RequestMethod.GET)
     public ModelAndView showCateringPage(ModelAndView modelAndView, @PathVariable Optional<Integer> page){
         modelAndView.setViewName("catering/catering");
+        List<CateringsEntity> cateringsList;
 
         MyUserPrincipal user = (MyUserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        ClientsEntity clientsEntity = clientEntityService.findByUser(user.getUser());
-        List<CateringsEntity> clientCaterings = cateringEntityService.getCateringsEntitiesByClient(clientsEntity);
+        if (user.getAuthorities().contains(new SimpleGrantedAuthority("ADMIN"))) {
+            cateringsList = cateringEntityService.getAllCateringsEntities();
+        } else {
+            ClientsEntity clientsEntity = clientEntityService.findByUser(user.getUser());
+            cateringsList = cateringEntityService.getCateringsEntitiesByClient(clientsEntity);
+            modelAndView.addObject("client", clientsEntity);
+        }
 
-        PagedListHolder<CateringsEntity> caterings = new PagedListHolder<>(clientCaterings);
+        PagedListHolder<CateringsEntity> caterings = new PagedListHolder<>(cateringsList);
         caterings.setPageSize(10);
         if (page.isPresent()) {
             int pageNumber = page.get();
             caterings.setPage(pageNumber);
         }
 
-        modelAndView.addObject("client", clientsEntity);
         modelAndView.addObject("cateringsList", caterings);
 
         return modelAndView;

@@ -38,7 +38,7 @@ public class IngredientsRepositoryImpl implements IngredientsRepository {
 
     @Override
     public void deleteIngredientsEntity(Integer ingredientId) {
-        getCurrentSession().delete(ingredientId);
+        getCurrentSession().delete(getIngredientsEntity(ingredientId));
     }
 
     @Override

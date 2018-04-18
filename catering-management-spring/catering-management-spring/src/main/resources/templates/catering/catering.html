@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <title th:text="Caterings"></title>
     <title th:replace="fragments/header :: headStyles"></title>
@@ -15,12 +15,13 @@
     <h1 class="text-center">Caterings</h1>
     <br/>
     <div class="container-fluid">
-        <a th:href="@{/catering/create/__${client.id}__}"><button class="btn btn-primary">Create</button></a>
+        <a sec:authorize="hasAuthority('USER')" th:href="@{/catering/create/__${client.id}__}"><button class="btn btn-primary">Create</button></a>
 
         <table class="table table-striped">
             <thead>
                 <tr>
                     <th scope="col">#</th>
+                    <th sec:authorize="hasAuthority('ADMIN')" scope="col">Client username</th>
                     <th scope="col">Name</th>
                     <th scope="colgroup"></th>
                 </tr>
@@ -28,6 +29,7 @@
             <tbody>
                 <tr th:each="catering : ${cateringsList.pageList}">
                     <td th:text="${catering.id}"></td>
+                    <td sec:authorize="hasAuthority('ADMIN')" th:text="${catering.getClientsByClientid().getUserByUsername().getUsername()}"></td>
                     <td th:text="${catering.name}"></td>
                     <td class="text-right">
                         <a th:href="@{/catering/__${catering.id}__/orders/orders}"><button class="btn btn-info">Details</button></a>
