@@ -67,8 +67,33 @@ public class DishesController {
                                           BindingResult bindingResult,
                                           HttpServletRequest request) {
         modelAndView.setViewName("dish/create");
-        String path = file.getAbsolutePath();
-        byte[] b = new byte[(int) file.length()];
+        dishEntity.setImage(convertToBytes(file));
+        dishEntityService.addDishEntity(dishEntity);
+        return "redirect:/dish/dishes";
+    }
+
+    @RequestMapping(value = "/dish/edit/{dishId}", method = RequestMethod.GET)
+    public ModelAndView showCreateDishPage(ModelAndView modelAndView, @PathVariable int dishId) {
+        modelAndView.setViewName("dish/edit");
+        DishesEntity dishesEntity = dishEntityService.getDishEntity(dishId);
+        modelAndView.addObject("dish", dishesEntity);
+        return modelAndView;
+    }
+
+    @RequestMapping(value="/dish/edit", method = RequestMethod.POST)
+    public String updateDish(ModelAndView modelAndView,
+                                          @RequestParam("file") File file,
+                                          DishesEntity dishEntity,
+                                          BindingResult bindingResult,
+                                          HttpServletRequest request) {
+        modelAndView.setViewName("dish/edit");
+        dishEntity.setImage(convertToBytes(file));
+        dishEntityService.updateDishEntity(dishEntity);
+        return "redirect:/dish/dishes";
+    }
+
+    private byte[] convertToBytes(@RequestParam("file") File file) {
+        byte[] b = new byte[(int)file.length()];
         try {
             FileInputStream fileInputStream = new FileInputStream(file);
             fileInputStream.read(b);
@@ -80,9 +105,7 @@ public class DishesController {
             System.out.println("Error Reading The File.");
             e1.printStackTrace();
         }
-        dishEntity.setImage(b);
-        dishEntityService.addDishEntity(dishEntity);
-        return "redirect:/dish/dishes";
+        return b;
     }
 
     @RequestMapping(value = "/dish/photo/{dishId}", method = RequestMethod.GET)

@@ -1,5 +1,7 @@
 .idea
 .idea/
-.img
-.jpg
-.jpeg
+*.img
+*.jpg
+*.jpeg
+*.JPEG
+*.JPG
