@@ -36,7 +36,7 @@ public class DishesRepositoryImpl implements DishesRepository {
 
     @Override
     public void deleteDishEntity(Integer dishId) {
-        getCurrentSession().delete(dishId);
+        getCurrentSession().delete(getDishEntity(dishId));
     }
 
     @Override

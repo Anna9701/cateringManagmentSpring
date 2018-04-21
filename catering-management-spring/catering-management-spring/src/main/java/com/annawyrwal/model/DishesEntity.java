@@ -11,6 +11,7 @@ public class DishesEntity {
     private int id;
     private String name;
     private byte[] image;
+    private String imageUri;
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -44,6 +45,8 @@ public class DishesEntity {
 
 
 
+
+
     @Override
     public int hashCode() {
 
@@ -51,12 +54,21 @@ public class DishesEntity {
     }
 
     @Column(name="dishImage")
-    @Type(type="org.hibernate.type.BinaryType")
     public byte[] getImage() {
         return image;
     }
 
     public void setImage(byte[] image) {
         this.image = image;
+    }
+
+    @Transient
+    public String getImageUri() {
+        return imageUri;
+    }
+
+    @Transient
+    public void setImageUri(String imageUri) {
+        this.imageUri = imageUri;
     }
 }

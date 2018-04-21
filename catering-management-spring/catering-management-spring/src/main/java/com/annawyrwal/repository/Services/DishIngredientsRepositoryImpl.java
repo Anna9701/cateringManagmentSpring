@@ -38,7 +38,7 @@ public class DishIngredientsRepositoryImpl implements DishIngredientsRepository 
 
     @Override
     public void deleteDishIngredientEntity(Integer dishIngredientId) {
-        getCurrentSession().delete(dishIngredientId);
+        getCurrentSession().delete(getDishIngredientEntity(dishIngredientId));
     }
 
     @Override
