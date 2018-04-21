@@ -15,6 +15,8 @@
         <form autocomplete="off" action="/dish/edit" th:action="@{/dish/edit}" method="post"
               th:object="${dish}" role="form">
 
+            <input type="hidden" th:field="${dish.id}"/>
+            <input type="hidden" th:field="${dish.image}"/>
             <div class="form-group">
                 <label for="name" class="cols-sm-2 control-label">Dish name</label>
                 <div class="cols-sm-10">
@@ -32,7 +34,7 @@
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-cutlery" aria-hidden="true"></i></span>
                         <input type="file"  name="file"
-                               placeholder="Image" id="file" class="form-control inputField " required/>
+                               placeholder="Image" id="file" class="form-control inputField "/>
                     </div>
                 </div>
             </div>

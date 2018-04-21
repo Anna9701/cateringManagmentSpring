@@ -87,7 +87,8 @@ public class DishesController {
                                           BindingResult bindingResult,
                                           HttpServletRequest request) {
         modelAndView.setViewName("dish/edit");
-        dishEntity.setImage(convertToBytes(file));
+        if (file.length() > 0)
+            dishEntity.setImage(convertToBytes(file));
         dishEntityService.updateDishEntity(dishEntity);
         return "redirect:/dish/dishes";
     }
