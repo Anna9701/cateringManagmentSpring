@@ -19,3 +19,6 @@ public class AdminPanelController {
         return modelAndView;
     }
 }
+
+//TODO some admin pannel. maybe password change ?
+//TODO how much work take multilanguage page?

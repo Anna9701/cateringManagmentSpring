@@ -15,7 +15,4 @@ public interface DishOrdersRepository {
     List<DishOrdersEntity> getDishOrderEntityByDish (DishesEntity dish);
     DishOrdersEntity getDishOrderEntity (OrdersEntity order, DishesEntity dish);
     DishOrdersEntity getDishOrderEntity (int dishOrderId);
-    //TODO: check relation many to many!!!!
-    //TODO: get all dishes by order id
-    //TODO: get all orders by dish ?? not necessary I think
 }

@@ -33,10 +33,10 @@
                 <td th:text="${ingredient.name}"></td>
                 <td th:text="${ingredient.price}"></td>
                 <td>
-                    <a th:href="@{/ingredient/dishes/__${ingredient.id}__}"><button class="btn btn-info">Dishes</button></a>
+                    <a th:href="@{/ingredient/__${ingredient.id}__/dishes}"><button class="btn btn-info">Dishes</button></a>
                 </td>
                 <td class="text-right">
-                    <a th:href="@{/ingredient/edit/__${ingredient.id}__}"><button class="btn btn-danger">Edit</button></a>
+                    <a th:href="@{/ingredient/edit/__${ingredient.id}__}"><button class="btn btn-default">Edit</button></a>
                     <a th:href="@{/ingredient/delete/__${ingredient.id}__}"><button class="btn btn-danger">Remove</button></a>
                 </td>
             </tr>

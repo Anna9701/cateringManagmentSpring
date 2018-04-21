@@ -1,6 +1,10 @@
 package com.annawyrwal.Controller.Ingredient;
 
+import com.annawyrwal.Service.Interfaces.DishEntityService;
+import com.annawyrwal.Service.Interfaces.DishIngredientEntityService;
 import com.annawyrwal.Service.Interfaces.IngredientEntityService;
+import com.annawyrwal.model.DishIngredientsEntity;
+import com.annawyrwal.model.DishesEntity;
 import com.annawyrwal.model.IngredientsEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
@@ -20,6 +24,9 @@ public class IngredientsController {
     @Autowired
     private IngredientEntityService ingredientEntityService;
 
+    @Autowired
+    private DishIngredientEntityService dishIngredientEntityService;
+
     @RequestMapping(value = {"/ingredient/ingredients/{page}", "/ingredient/ingredients"}, method = RequestMethod.GET)
     public ModelAndView showIngredientsPage(ModelAndView modelAndView, @PathVariable Optional<Integer> page) {
         modelAndView.setViewName("ingredient/ingredients");
@@ -33,6 +40,28 @@ public class IngredientsController {
         }
 
         modelAndView.addObject("ingredientsList", ingredients);
+        return modelAndView;
+    }
+
+
+    @RequestMapping(value = {"/ingredient/{ingredientId}/dishes/{page}",
+            "/ingredient/{ingredientId}/dishes"}, method = RequestMethod.GET)
+    public ModelAndView showDishesPage(ModelAndView modelAndView,
+                                       @PathVariable int ingredientId,
+                                       @PathVariable Optional<Integer> page) {
+        modelAndView.setViewName("ingredient/dishes");
+
+        IngredientsEntity ingredientsEntity = ingredientEntityService.getIngredientsEntity(ingredientId);
+        List<DishIngredientsEntity> dishIngredientsEntities = dishIngredientEntityService
+                .getDishIngredientEntityByIngredient(ingredientsEntity);
+        PagedListHolder<DishIngredientsEntity> dishIngredientsEntityPagedListHolder = new PagedListHolder<>(dishIngredientsEntities);
+        dishIngredientsEntityPagedListHolder.setPageSize(10);
+        if (page.isPresent()) {
+            int pageNumber = page.get();
+            dishIngredientsEntityPagedListHolder.setPage(pageNumber);
+        }
+        modelAndView.addObject("ingredient", ingredientsEntity);
+        modelAndView.addObject("dishesList", dishIngredientsEntityPagedListHolder);
         return modelAndView;
     }
 
@@ -80,3 +109,5 @@ public class IngredientsController {
         return "redirect:/ingredient/ingredients";
     }
 }
+
+//TODO usuwanie kaskadowe
