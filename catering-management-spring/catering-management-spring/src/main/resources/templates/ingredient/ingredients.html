@@ -11,6 +11,7 @@
 
 <!-- Page content -->
 <div  sec:authorize="hasAuthority('ADMIN')" class="w3-content" style="max-width:2000px;margin-top:60px">
+    <hr/>
     <h2 class="alert alert-danger text-center" th:if="${ErrorMessage != null}" th:text="${ErrorMessage}"></h2>
     <h1 class="text-center">Ingredients</h1>
     <br/>
@@ -33,7 +34,7 @@
                 <td th:text="${ingredient.name}"></td>
                 <td th:text="${ingredient.price}"></td>
                 <td>
-                    <a th:href="@{/ingredient/__${ingredient.id}__/dishes}"><button class="btn btn-info">Dishes</button></a>
+                    <a th:href="@{/ingredient/__${ingredient.id}__/dishes}"><span>Dishes</span></a>
                 </td>
                 <td class="text-right">
                     <a th:href="@{/ingredient/edit/__${ingredient.id}__}"><button class="btn btn-default">Edit</button></a>

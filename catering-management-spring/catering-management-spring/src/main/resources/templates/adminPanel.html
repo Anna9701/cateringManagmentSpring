@@ -10,6 +10,7 @@
 
 <!-- Page content -->
 <br/><br/>
+<hr/>
 <h2><p class="alert alert-success" th:if="${successMessage != null}" th:text="${successMessage}"></p></h2>
 
 <div class="panel-title text-center">
@@ -41,8 +42,7 @@
 
         <button type="submit" class="btn btn-primary block full-width m-b">Update</button>
     </form>
-</div>
-<div class="main-login main-center">
+
     <h2 class="title">Change e-mail</h2>
     <form autocomplete="off" action="#" th:action="@{/adminPanel/updateEmail}"
           method="post" class="m-t form-horizontal" role="form" th:object="${user}"

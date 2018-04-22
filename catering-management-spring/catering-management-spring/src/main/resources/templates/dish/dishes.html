@@ -31,7 +31,7 @@
                     <td th:text="${dish.id}"></td>
                     <td th:text="${dish.name}"></td>
                     <td>
-                        <a th:href="@{/dish/photo/__${dish.id}__}"><button class="btn btn-info">Photo</button></a>
+                        <a th:href="@{/dish/photo/__${dish.id}__}"><span>Photo</span></a>
                     </td>
                     <td sec:authorize="hasAuthority('ADMIN')" class="text-right">
                         <a th:href="@{/dish/__${dish.id}__/ingredients}"><button class="btn btn-success">Ingredients</button></a>
