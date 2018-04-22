@@ -9,7 +9,7 @@
 <div th:replace="fragments/header :: smallScreensNavBar"></div>
 <!-- Page content -->
 <div class="w3-content" style="max-width:2000px;margin-top:60px">
-
+<hr/>
     <h1 class="text-center">Place</h1>
 
     <div class="main-login main-center">
@@ -23,7 +23,7 @@
                 <label for="address" class="cols-sm-2 control-label">Address</label>
                 <div class="cols-sm-10">
                     <div class="input-group">
-                        <span class="input-group-addon"><i class="fas fa-book" aria-hidden="true"></i></span>
+                        <span class="input-group-addon"><i class="fas fa-map-marker" aria-hidden="true"></i></span>
                         <input type="text" th:field="${place.address}"
                                placeholder="Address" id="address" class="form-control inputField" required/>
                     </div>
@@ -34,7 +34,7 @@
                 <label for="postalCode" class="cols-sm-2 control-label">Postal code</label>
                 <div class="cols-sm-10">
                     <div class="input-group">
-                        <span class="input-group-addon"><i class="fas fa-book" aria-hidden="true"></i></span>
+                        <span class="input-group-addon"><i class="fas fa-envelope-square" aria-hidden="true"></i></span>
                         <input type="text" th:field="${place.postalCode}"
                                placeholder="Code" id="postalCode" class="form-control inputField"/>
                     </div>
@@ -45,7 +45,7 @@
                 <label for="floor" class="cols-sm-2 control-label">Floor</label>
                 <div class="cols-sm-10">
                     <div class="input-group">
-                        <span class="input-group-addon"><i class="fas fa-book" aria-hidden="true"></i></span>
+                        <span class="input-group-addon"><i class="fas fa-sort-numeric-up" aria-hidden="true"></i></span>
                         <input type="number" th:field="${place.floor}"
                                placeholder="Floor" id="floor" class="form-control inputField"/>
                     </div>
@@ -56,7 +56,7 @@
                 <label for="hallNumber" class="cols-sm-2 control-label">Hall Number</label>
                 <div class="cols-sm-10">
                     <div class="input-group">
-                        <span class="input-group-addon"><i class="fas fa-book" aria-hidden="true"></i></span>
+                        <span class="input-group-addon"><i class="fas fa-sort-numeric-down" aria-hidden="true"></i></span>
                         <input type="number" th:field="${place.hallNumber}"
                                placeholder="Hall Number" id="hallNumber" class="form-control inputField"/>
                     </div>

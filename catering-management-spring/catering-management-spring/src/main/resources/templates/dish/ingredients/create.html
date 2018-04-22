@@ -21,7 +21,7 @@
                 <label for="ingredientId" class="cols-sm-2 control-label">Ingredient name</label>
                 <div class="cols-sm-10">
                     <div class="input-group">
-                        <span class="input-group-addon"><i class="fas fa-users" aria-hidden="true"></i></span>
+                        <span class="input-group-addon"><i class="fab fa-apple" aria-hidden="true"></i></span>
                         <select th:field="${dishIngredient.ingredientId}" id="ingredientId" class="form-control">
                             <option th:each="ingredient : ${ingredientsList}" th:value="${ingredient.id}" th:text="${ingredient.name}"></option>
                         </select>
@@ -33,7 +33,7 @@
                 <label for="amountOf" class="cols-sm-2 control-label">Ingredients amount for one portion</label>
                 <div class="cols-sm-10">
                     <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-cutlery" aria-hidden="true"></i></span>
+                        <span class="input-group-addon"><i class="fas fa-sort-numeric-up" aria-hidden="true"></i></span>
                         <input type="number"  th:field="${dishIngredient.amountOf}"
                                placeholder="AmountOf" id="amountOf" class="form-control inputField" required/>
                     </div>
@@ -42,7 +42,7 @@
 
             <button type="submit" class="btn btn-primary block full-width m-b text-center">Add</button>
         </form> <br/>
-        <a class="text-center" th:href="@{/dish/ingredients/__${dishId}__}"><button class="btn btn-default block full-width m-b text-center">Back</button></a>
+        <a class="text-center" th:href="@{/dish/__${dishId}__/ingredients}"><button class="btn btn-default block full-width m-b text-center">Back</button></a>
     </div>
 
 </div>

@@ -9,7 +9,7 @@
 <div th:replace="fragments/header :: smallScreensNavBar"></div>
 <!-- Page content -->
 <div class="w3-content" style="max-width:2000px;margin-top:60px">
-
+    <hr/>
     <h1 class="text-center">Create Dish Order</h1>
     <div class="main-login main-center m-t">
         <form autocomplete="off" action="/catering/orders/dishes/create" th:action="@{/catering/orders/dishes/create}" method="post"
@@ -21,7 +21,7 @@
                 <label for="dishId" class="cols-sm-2 control-label">Dish name</label>
                 <div class="cols-sm-10">
                     <div class="input-group">
-                        <span class="input-group-addon"><i class="fas fa-users" aria-hidden="true"></i></span>
+                        <span class="input-group-addon"><i class="fas fa-utensils" aria-hidden="true"></i></span>
                         <select th:field="${dishOrder.dishId}" id="dishId" class="form-control">
                             <option th:each="dish : ${dishesList}" th:value="${dish.id}" th:text="${dish.name}"></option>
                         </select>

@@ -60,4 +60,3 @@ public class AdminPanelController {
 }
 
 //TODO admin lista klientow
-//TODO ikonki w formularzach

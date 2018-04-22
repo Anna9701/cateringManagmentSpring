@@ -9,7 +9,7 @@
 <div th:replace="fragments/header :: smallScreensNavBar"></div>
 <!-- Page content -->
 <div class="w3-content" style="max-width:2000px;margin-top:60px">
-
+    <hr/>
     <h1 class="text-center">Create Order</h1>
     <div class="main-login main-center">
         <form autocomplete="off" action="/catering/orders/create" th:action="@{/catering/orders/create}" method="post"
@@ -32,7 +32,7 @@
                 <label for="startTime" class="cols-sm-2 control-label">Start time</label>
                 <div class="cols-sm-10">
                     <div class="input-group">
-                        <span class="input-group-addon"><i class="fas fa-book" aria-hidden="true"></i></span>
+                        <span class="input-group-addon"><i class="far fa-clock" aria-hidden="true"></i></span>
                         <input type="text" th:object="${date}"  th:field="${date.startTime}"
                                placeholder="yyyy-mm-dd hh:mm:ss" id="startTime" class="form-control inputField"/>
                     </div>
@@ -43,7 +43,7 @@
                 <label for="endTime" class="cols-sm-2 control-label">End time</label>
                 <div class="cols-sm-10">
                     <div class="input-group">
-                        <span class="input-group-addon"><i class="fas fa-book" aria-hidden="true"></i></span>
+                        <span class="input-group-addon"><i class="fas fa-clock" aria-hidden="true"></i></span>
                         <input type="text" th:object="${date}"  th:field="${date.endTime}"
                                placeholder="yyyy-mm-dd hh:mm:ss" id="endTime" class="form-control inputField"/>
                     </div>
@@ -54,7 +54,7 @@
                 <label for="address" class="cols-sm-2 control-label">Address</label>
                 <div class="cols-sm-10">
                     <div class="input-group">
-                        <span class="input-group-addon"><i class="fas fa-book" aria-hidden="true"></i></span>
+                        <span class="input-group-addon"><i class="fas fa-map-marker" aria-hidden="true"></i></span>
                         <input type="text" th:object="${place.address}"  th:field="${place.address}"
                                placeholder="Address" id="address" class="form-control inputField"/>
                     </div>
@@ -73,6 +73,7 @@
 
             <button type="submit" class="btn btn-primary block full-width m-b text-center">Create</button>
         </form>
+        <a th:href="@{/catering/__${order.cateringId}__/orders/orders}"><button type="button" class="btn btn-default">Back</button></a>
     </div>
 
 </div>
