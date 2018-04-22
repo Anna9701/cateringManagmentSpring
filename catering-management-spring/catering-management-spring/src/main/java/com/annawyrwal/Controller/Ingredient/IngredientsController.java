@@ -6,6 +6,8 @@ import com.annawyrwal.Service.Interfaces.IngredientEntityService;
 import com.annawyrwal.model.DishIngredientsEntity;
 import com.annawyrwal.model.DishesEntity;
 import com.annawyrwal.model.IngredientsEntity;
+import com.sun.org.apache.xpath.internal.operations.Mod;
+import org.postgresql.util.PSQLException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -74,10 +77,15 @@ public class IngredientsController {
     }
 
     @RequestMapping(value = "/ingredient/delete/{ingredientId}", method = RequestMethod.GET)
-    public String deleteIngredient(ModelAndView modelAndView, @PathVariable int ingredientId) {
+    public ModelAndView deleteIngredient(ModelAndView modelAndView, @PathVariable int ingredientId) {
         modelAndView.setViewName("ingredient/ingredients");
-        ingredientEntityService.deleteIngredientsEntity(ingredientId);
-        return "redirect:/ingredient/ingredients";
+        try {
+            ingredientEntityService.deleteIngredientsEntity(ingredientId);
+        } catch (Exception exception) {
+            modelAndView.addObject("ErrorMessage", "You cannot delete this ingredient." +
+                    "There are dishes containing it.");
+        }
+        return showIngredientsPage(modelAndView, Optional.ofNullable(1));
     }
 
     @RequestMapping(value="/ingredient/create", method = RequestMethod.POST)
@@ -109,5 +117,3 @@ public class IngredientsController {
         return "redirect:/ingredient/ingredients";
     }
 }
-
-//TODO usuwanie kaskadowe

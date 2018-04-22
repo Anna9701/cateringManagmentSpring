@@ -11,7 +11,7 @@
 
 <!-- Page content -->
 <div  sec:authorize="hasAuthority('ADMIN')" class="w3-content" style="max-width:2000px;margin-top:60px">
-
+    <h2 class="alert alert-danger text-center" th:if="${ErrorMessage != null}" th:text="${ErrorMessage}"></h2>
     <h1 class="text-center">Ingredients</h1>
     <br/>
     <div class="container-fluid">
