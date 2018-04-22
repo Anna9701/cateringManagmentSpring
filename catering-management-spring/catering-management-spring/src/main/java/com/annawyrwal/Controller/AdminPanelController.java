@@ -60,3 +60,4 @@ public class AdminPanelController {
 }
 
 //TODO admin lista klientow
+//TODO zmiana hasla u klienta
