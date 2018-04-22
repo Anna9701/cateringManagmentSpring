@@ -77,14 +77,14 @@ public class RegisterController {
 			user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 			user.setRole("USER");
 			// Set user to enabled
-			user.setEnabled(true);
-
-			// Save user
-			userService.saveUser(user);
+			user.setEnabled(false);
 
 		    user.setConfirmationToken(UUID.randomUUID().toString());
-				
-			String appUrl = request.getScheme() + "://" + request.getServerName();
+
+            // Save user
+            userService.saveUser(user);
+
+			String appUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
 			
 			SimpleMailMessage registrationEmail = new SimpleMailMessage();
 			registrationEmail.setTo(user.getEmail());
@@ -127,47 +127,12 @@ public class RegisterController {
 		if (user == null) { // No token found in DB
 			modelAndView.addObject("invalidToken", "Oops!  This is an invalid confirmation link.");
 		} else { // Token found
-			modelAndView.addObject("confirmationToken", user.getConfirmationToken());
+			user.setEnabled(true);
+			userService.saveUser(user);
+			modelAndView.addObject("successMessage", "Your account is activated. Now you can log in");
 		}
 
 		modelAndView.setViewName("confirm");
-		return modelAndView;
-	}
-
-	// Process confirmation link
-	@RequestMapping(value="/confirm", method = RequestMethod.POST)
-	public ModelAndView confirmRegistration(ModelAndView modelAndView, BindingResult bindingResult, @RequestParam Map<String, String> requestParams, RedirectAttributes redir) {
-
-		modelAndView.setViewName("confirm");
-
-		Zxcvbn passwordCheck = new Zxcvbn();
-
-		Strength strength = passwordCheck.measure(requestParams.get("password"));
-
-		if (strength.getScore() < 3) {
-			//modelAndView.addObject("errorMessage", "Your password is too weak.  Choose a stronger one.");
-			bindingResult.reject("password");
-
-			redir.addFlashAttribute("errorMessage", "Your password is too weak.  Choose a stronger one.");
-
-			modelAndView.setViewName("redirect:confirm?token=" + requestParams.get("token"));
-			System.out.println(requestParams.get("token"));
-			return modelAndView;
-		}
-
-		// Find the user associated with the reset token
-		User user = userService.findByConfirmationToken(requestParams.get("token"));
-
-		// Set new password
-		user.setPassword(bCryptPasswordEncoder.encode(requestParams.get("password")));
-
-		// Set user to enabled
-		user.setEnabled(true);
-
-		// Save user
-		userService.saveUser(user);
-
-		modelAndView.addObject("successMessage", "Your password has been set!");
 		return modelAndView;
 	}
 	
