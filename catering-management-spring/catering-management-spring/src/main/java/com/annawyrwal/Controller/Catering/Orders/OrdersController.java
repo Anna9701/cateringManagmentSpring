@@ -126,5 +126,3 @@ public class OrdersController {
         return "redirect:/catering/" + orderEntity.getCateringId() + "/orders/orders";
     }
 }
-
-//TODO : liczenie ceny

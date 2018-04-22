@@ -1,11 +1,10 @@
 package com.annawyrwal.Controller.Catering.Orders.Dishes;
 
 import com.annawyrwal.Service.Interfaces.DishEntityService;
+import com.annawyrwal.Service.Interfaces.DishIngredientEntityService;
 import com.annawyrwal.Service.Interfaces.DishOrderEntityService;
 import com.annawyrwal.Service.Interfaces.OrderEntityService;
-import com.annawyrwal.model.DishOrdersEntity;
-import com.annawyrwal.model.DishesEntity;
-import com.annawyrwal.model.OrdersEntity;
+import com.annawyrwal.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
@@ -29,6 +28,9 @@ public class DishOrdersController {
 
     @Autowired
     private DishEntityService dishEntityService;
+
+    @Autowired
+    private DishIngredientEntityService dishIngredientEntityService;
 
     @RequestMapping(value = {"/catering/orders/{orderId}/dishes/{page}",
             "/catering/orders/{orderId}/dishes"}, method = RequestMethod.GET)
@@ -57,10 +59,18 @@ public class DishOrdersController {
     @RequestMapping(value = "/catering/orders/dishes/{dishOrderId}", method = RequestMethod.GET)
     public String deleteDishOrder(ModelAndView modelAndView, @PathVariable int dishOrderId) {
         int orderId = dishOrderEntityService.getDishOrderEntity(dishOrderId).getOrderById().getId();
-
+        DishOrdersEntity dishOrdersEntity = dishOrderEntityService.getDishOrderEntity(dishOrderId);
+        updatePriceAfterDeletion(dishOrdersEntity);
         dishOrderEntityService.deleteDishOrderEntity(dishOrderId);
 
         return "redirect:/catering/orders/" + orderId + "/dishes";
+    }
+
+    private void updatePriceAfterDeletion(DishOrdersEntity dishOrdersEntity) {
+        OrdersEntity ordersEntity = dishOrdersEntity.getOrderById();
+        double cost = countPrice(dishOrdersEntity);
+        ordersEntity.setCost(ordersEntity.getCost() - cost);
+        orderEntityService.updateOrderEntity(ordersEntity);
     }
 
     @RequestMapping(value = "/catering/orders/dishes/create/{orderId}", method = RequestMethod.GET)
@@ -87,6 +97,41 @@ public class DishOrdersController {
 
         dishOrderEntityService.addDishOrderEntity(dishOrdersEntity);
 
+        updatePriceAfterAddition(dishOrdersEntity);
+
         return "redirect:/catering/orders/" + dishOrdersEntity.getOrderId() + "/dishes";
+    }
+
+    private void updatePriceAfterAddition(DishOrdersEntity dishOrdersEntity) {
+        OrdersEntity ordersEntity = dishOrdersEntity.getOrderById();
+        double cost = countPrice(dishOrdersEntity);
+        ordersEntity.setCost(ordersEntity.getCost() + cost);
+        orderEntityService.updateOrderEntity(ordersEntity);
+    }
+
+    private double countPrice(DishOrdersEntity dishOrdersEntity) {
+        OrdersEntity ordersEntity = dishOrdersEntity.getOrderById();
+        DishesEntity dishesEntity = dishOrdersEntity.getDishById();
+        List<DishIngredientsEntity> dishIngredientsEntities = dishIngredientEntityService
+                .getDishIngredientEntityByDish(dishesEntity);
+        double priceOfIngredients = 0;
+        for (DishIngredientsEntity dishIngredient : dishIngredientsEntities) {
+            priceOfIngredients += dishIngredient.getAmountOf() * dishIngredient.getIngredientById().getPrice();
+        }
+        double cost = priceOfIngredients * ordersEntity.getAmountOfPeople();
+        cost += cost * 0.05;
+        return cost;
+    }
+
+    @RequestMapping(value = "/catering/orders/dishes/image/{dishOrderId}", method = RequestMethod.GET)
+    public ModelAndView showPhotoDishPage(ModelAndView modelAndView, @PathVariable int dishOrderId) {
+        modelAndView.setViewName("catering/orders/dishes/photo");
+        DishOrdersEntity dishOrdersEntity = dishOrderEntityService.getDishOrderEntity(dishOrderId);
+        DishesEntity dishesEntity = dishOrdersEntity.getDishById();
+
+        modelAndView.addObject("dish", dishesEntity);
+        modelAndView.addObject("orderId", dishOrdersEntity.getOrderById().getId());
+
+        return modelAndView;
     }
 }

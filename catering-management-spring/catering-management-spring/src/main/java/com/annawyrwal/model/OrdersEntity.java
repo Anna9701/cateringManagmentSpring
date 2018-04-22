@@ -10,7 +10,7 @@ import java.util.Objects;
 public class OrdersEntity {
     private int id;
     private int amountOfPeople;
-    private float cost = 0;
+    private double cost = 0;
     private boolean invoice = true;
     private boolean payedUp = false;
     private CateringsEntity cateringsByCateringid;
@@ -44,11 +44,11 @@ public class OrdersEntity {
 
     @Basic
     @Column(name = "cost", nullable = false)
-    public float getCost() {
+    public double getCost() {
         return cost;
     }
 
-    public void setCost(float cost) {
+    public void setCost(double cost) {
         this.cost = cost;
     }
 
@@ -79,7 +79,7 @@ public class OrdersEntity {
         OrdersEntity that = (OrdersEntity) o;
         return id == that.id &&
                 amountOfPeople == that.amountOfPeople &&
-                Float.compare(that.cost, cost) == 0 &&
+                Double.compare(that.cost, cost) == 0 &&
                 invoice == that.invoice &&
                 payedUp == that.payedUp;
     }
