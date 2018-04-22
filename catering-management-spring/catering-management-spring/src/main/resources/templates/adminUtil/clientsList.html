@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <title th:text="Clients"></title>
+    <title th:replace="fragments/header :: headStyles"></title>
+</head>
+<body>
+<div th:replace="fragments/header :: normalNavBar"></div>
+<div th:replace="fragments/header :: smallScreensNavBar"></div>
+
+<!-- Page content -->
+<div class="w3-content" style="max-width:2000px;margin-top:60px">
+    <hr/>
+    <h1 class="text-center">Clients list</h1>
+    <br/>
+
+    <div class="container-fluid">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Username</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">E-mail</th>
+                <th scope="col">Enabled</th>
+                <th scope="colgroup"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="client : ${clientsList.pageList}">
+                <td th:text="${client.id}"></td>
+                <td th:text="${client.getUserByUsername().getUsername()}"></td>
+                <td th:if="${client.firstName != null}" th:text="${client.firstName}"></td>
+                <td th:unless="${client.firstName != null}"></td>
+                <td th:text="${client.lastName}"></td>
+                <td th:text="${client.getUserByUsername().getEmail()}"></td>
+                <td th:text="${client.getUserByUsername().getEnabled()}"></td>
+                <td th:if="${client.getUserByUsername().getEnabled() == true}" class="text-right">
+                    <a th:href="@{/adminUtil/disable/__${client.id}__}"><button class="btn btn-warning">Disable</button></a>
+                </td>
+                <td th:unless="${client.getUserByUsername().getEnabled() == true}" class="text-right">
+                    <a th:href="@{/adminUtil/enable/__${client.id}__}"><button class="btn btn-default">Enable</button></a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <span>Page: </span>
+        <a th:if="${!clientsList.firstPage}"
+           th:href="@{/clientList/__${clientsList.page - 1}__}">Previous</a>
+        <span th:text="${clientsList.page + 1}">1 / 10</span>
+        <a th:if="${!clientsList.lastPage}"
+           th:href="@{/clientList/__${clientsList.page + 1}__}">Next</a>
+
+    </div>
+
+</div>
+<!-- End Page Content -->
+<div th:replace="fragments/footer :: footer"></div>
+<div th:replace="fragments/footer :: scripts"></div>
+</body>
+</html>
