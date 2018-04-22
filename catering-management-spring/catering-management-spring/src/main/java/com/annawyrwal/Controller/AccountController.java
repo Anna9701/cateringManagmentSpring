@@ -1,12 +1,15 @@
 package com.annawyrwal.Controller;
 
+import com.annawyrwal.Service.Authentication.UserService;
 import com.annawyrwal.model.ClientsEntity;
 import com.annawyrwal.model.ContactDataEntity;
 import com.annawyrwal.Service.Interfaces.ClientEntityService;
 import com.annawyrwal.Service.Interfaces.ContactDataService;
 import com.annawyrwal.Service.Authentication.MyUserPrincipal;
+import com.annawyrwal.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +23,12 @@ import javax.validation.Valid;
 public class AccountController {
     private ClientEntityService clientEntityService;
     private ContactDataService contactDataService;
+
+    @Autowired
+    UserService userService;
+
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
     public AccountController(ClientEntityService clientEntityService, ContactDataService contactDataService) {
@@ -58,6 +67,32 @@ public class AccountController {
         contactDataService.updateContactData(contactDataEntity);
         modelAndView.addObject("successMessage", "Your account was successfully updated.");
 
+        return modelAndView;
+    }
+
+
+
+    @RequestMapping(value = "/account/changePassword", method = RequestMethod.GET)
+    public ModelAndView showAdminPage(ModelAndView modelAndView, HttpServletRequest request) {
+        MyUserPrincipal user = (MyUserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        modelAndView.setViewName("account/changePassword");
+
+        User user1 = userService.findByUsername(user.getUsername());
+        modelAndView.addObject("user", user1);
+
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/account/changePassword", method = RequestMethod.POST)
+    public ModelAndView updatePassword(ModelAndView modelAndView,
+                                       @Valid User user,
+                                       BindingResult bindingResult,
+                                       HttpServletRequest request) {
+        modelAndView.setViewName("/account/changePassword");
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        userService.saveUser(user);
+        modelAndView.addObject("successMessage", "Password changed successfully");
         return modelAndView;
     }
 }
