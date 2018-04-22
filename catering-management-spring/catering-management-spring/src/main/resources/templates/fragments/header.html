@@ -66,15 +66,22 @@
             <a href="/catering/catering" class="w3-bar-item w3-button w3-padding-large w3-hide-small">CATERINGS</a>
             <a href="/dish/dishes" class="w3-bar-item w3-button w3-padding-large w3-hide-small">DISHES</a>
             <a sec:authorize="hasAuthority('ADMIN')" href="/ingredient/ingredients" class="w3-bar-item w3-button w3-padding-large w3-hide-small">INGREDIENTS</a>
-            <form  sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
+            <form  sec:authorize="hasAuthority('ADMIN')" th:action="@{/logout}" method="post">
                 <input value="Sign out" class="w3-bar-item w3-button w3-hide-small w3-right" type="submit"/>
             </form>
             <a href="/adminPanel" sec:authorize="hasAuthority('ADMIN')" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">Hello  <span sec:authentication="name"></span></a>
-            <a href="/account" sec:authorize="hasAuthority('USER')" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">Hello  <span sec:authentication="name"></span></a>
+            <div sec:authorize="hasAuthority('USER')" class="w3-dropdown-hover w3-hide-small w3-padding-large w3-right">
+                <button class="w3-padding-large w3-button">Hello  <span sec:authentication="name"></span> <i class="fa fa-caret-down"></i></button>
+                <div class="w3-dropdown-content w3-bar-block w3-card-4">
+                    <a href="/account" class="w3-bar-item w3-button">Edit account</a>
+                    <a href="#" class="w3-bar-item w3-button">Change password</a>
+                    <form  sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
+                        <input value="Sign out" class="w3-bar-item w3-button w3-hide-small w3-right" type="submit"/>
+                    </form>
+                </div>
+            </div>
             <a sec:authorize="isAnonymous()" href="/login" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">Login</a>
             <a sec:authorize="isAnonymous()" href="/register" class="w3-bar-item w3-button w3-padding-large w3-hide-small w3-right">Register</a>
-            <a href="javascript:void(0)" class="w3-padding-large w3-hover-red w3-hide-small w3-right"><i
-                    class="fa fa-search"></i></a>
         </div>
     </div>
 </div>
