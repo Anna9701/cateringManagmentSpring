@@ -39,7 +39,7 @@ public class DishOrdersRepositoryImpl implements DishOrdersRepository {
 
     @Override
     public void deleteDishOrderEntity(Integer orderId) {
-        getCurrentSession().delete(orderId);
+        getCurrentSession().delete(getDishOrderEntity(orderId));
     }
 
     @Override

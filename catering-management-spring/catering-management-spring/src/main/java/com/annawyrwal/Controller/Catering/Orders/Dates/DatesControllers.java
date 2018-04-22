@@ -20,13 +20,18 @@ public class DatesControllers {
     @Autowired
     private DateEntityService dateEntityService;
 
+    @Autowired
+    private OrderEntityService orderEntityService;
+
     @RequestMapping(value = "/catering/orders/date/{dateId}", method = RequestMethod.GET)
     public ModelAndView showDatePage(ModelAndView modelAndView, @PathVariable int dateId) {
         modelAndView.setViewName("catering/orders/date");
 
         DatesEntity datesEntities = dateEntityService.getDateEntity(dateId);
+        OrdersEntity ordersEntity = orderEntityService.getOrdersByDatesEntity(datesEntities).get(0);
 
         modelAndView.addObject("date", datesEntities);
+        modelAndView.addObject("cateringId", ordersEntity.getCateringsByCateringid().getId());
 
         return modelAndView;
     }

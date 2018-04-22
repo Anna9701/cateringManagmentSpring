@@ -30,7 +30,7 @@
                 <td th:text="${dishOrder.takeaway}"></td>
                 <td th:text="${dishOrder.getDishById().getName()}"></td>
                 <td>
-                    <a th:href="@{/catering/orders/place/__${dishOrder.getPlacesByPlaceid().getId()}__}"><span>Image</span></a>
+                    <a th:href="@{/catering/orders/dishes/image/__${dishOrder.getDishById().getId()}__}"><span>Image</span></a>
                 </td>
                 <td class="text-right">
                     <a th:href="@{/catering/orders/dishes/__${dishOrder.id}__}"><button class="btn btn-danger">Remove</button></a>

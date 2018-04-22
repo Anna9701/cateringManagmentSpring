@@ -22,3 +22,5 @@ public class AdminPanelController {
 
 //TODO some admin pannel. maybe password change ?
 //TODO how much work take multilanguage page?
+//TODO email confirmation
+//TODO dish photos inside dish order

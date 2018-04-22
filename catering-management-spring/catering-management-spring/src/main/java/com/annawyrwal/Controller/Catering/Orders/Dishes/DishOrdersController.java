@@ -47,7 +47,7 @@ public class DishOrdersController {
             orders.setPage(pageNumber);
         }
 
-        modelAndView.addObject("cateringId", ordersEntity.getCateringId());
+        modelAndView.addObject("cateringId", ordersEntity.getCateringsByCateringid().getId());
         modelAndView.addObject("orderId", orderId);
         modelAndView.addObject("dishOrdersList", orders);
 
@@ -58,7 +58,7 @@ public class DishOrdersController {
     public String deleteDishOrder(ModelAndView modelAndView, @PathVariable int dishOrderId) {
         int orderId = dishOrderEntityService.getDishOrderEntity(dishOrderId).getOrderById().getId();
 
-        dishEntityService.deleteDishEntity(dishOrderId);
+        dishOrderEntityService.deleteDishOrderEntity(dishOrderId);
 
         return "redirect:/catering/orders/" + orderId + "/dishes";
     }
