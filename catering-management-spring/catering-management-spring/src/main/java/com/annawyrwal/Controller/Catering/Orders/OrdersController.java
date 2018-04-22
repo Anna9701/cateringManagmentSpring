@@ -1,13 +1,7 @@
 package com.annawyrwal.Controller.Catering.Orders;
 
-import com.annawyrwal.Service.Interfaces.CateringEntityService;
-import com.annawyrwal.Service.Interfaces.DateEntityService;
-import com.annawyrwal.Service.Interfaces.OrderEntityService;
-import com.annawyrwal.Service.Interfaces.PlaceEntityService;
-import com.annawyrwal.model.CateringsEntity;
-import com.annawyrwal.model.DatesEntity;
-import com.annawyrwal.model.OrdersEntity;
-import com.annawyrwal.model.PlacesEntity;
+import com.annawyrwal.Service.Interfaces.*;
+import com.annawyrwal.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
@@ -34,6 +28,9 @@ public class OrdersController {
 
     @Autowired
     private PlaceEntityService placeEntityService;
+
+    @Autowired
+    private ClientEntityService clientEntityService;
 
     @RequestMapping(value = {"/catering/{cateringId}/orders/orders/{page}",
             "/catering/{cateringId}/orders/orders"}, method = RequestMethod.GET)
@@ -85,6 +82,10 @@ public class OrdersController {
     public ModelAndView updateOrder(ModelAndView modelAndView, @PathVariable int orderId) {
         modelAndView.setViewName("catering/orders/edit");
         OrdersEntity ordersEntity = orderEntityService.getOrderEntity(orderId);
+        ordersEntity.setCateringId(ordersEntity.getCateringsByCateringid().getId());
+        ordersEntity.setClientId(ordersEntity.getClientsByClientid().getId());
+        ordersEntity.setDateId(ordersEntity.getDatesByDateid().getId());
+        ordersEntity.setPlaceId(ordersEntity.getPlacesByPlaceid().getId());
         modelAndView.addObject("order", ordersEntity);
         return modelAndView;
     }
@@ -95,7 +96,14 @@ public class OrdersController {
                                           BindingResult bindingResult,
                                           HttpServletRequest request) {
         modelAndView.setViewName("catering/orders/edit");
-
+        CateringsEntity cateringsEntity = cateringEntityService.findCateringById(orderEntity.getCateringId());
+        ClientsEntity clientsEntity = clientEntityService.getClient(orderEntity.getClientId());
+        DatesEntity datesEntity = dateEntityService.getDateEntity(orderEntity.getDateId());
+        PlacesEntity placesEntity = placeEntityService.getPlaceEntity(orderEntity.getPlaceId());
+        orderEntity.setPlacesByPlaceid(placesEntity);
+        orderEntity.setDatesByDateid(datesEntity);
+        orderEntity.setClientsByClientid(clientsEntity);
+        orderEntity.setCateringsByCateringid(cateringsEntity);
         orderEntityService.updateOrderEntity(orderEntity);
 
         return "redirect:/catering/" + orderEntity.getCateringId() + "/orders/orders";

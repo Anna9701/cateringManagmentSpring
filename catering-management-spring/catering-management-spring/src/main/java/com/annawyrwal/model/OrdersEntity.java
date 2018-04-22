@@ -21,6 +21,18 @@ public class OrdersEntity {
     @Transient
     private int cateringId;
 
+    @Transient
+    private int clientId;
+
+    @Transient
+    private int placeId;
+
+    @Transient
+    private int dateId;
+
+    public OrdersEntity() {
+    }
+
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name = "id")
@@ -138,5 +150,35 @@ public class OrdersEntity {
     @Transient
     public void setCateringId(int cateringId) {
         this.cateringId = cateringId;
+    }
+
+    @Transient
+    public int getClientId() {
+        return clientId;
+    }
+
+    @Transient
+    public void setClientId(int clientId) {
+        this.clientId = clientId;
+    }
+
+    @Transient
+    public int getPlaceId() {
+        return placeId;
+    }
+
+    @Transient
+    public void setPlaceId(int placeId) {
+        this.placeId = placeId;
+    }
+
+    @Transient
+    public int getDateId() {
+        return dateId;
+    }
+
+    @Transient
+    public void setDateId(int dateId) {
+        this.dateId = dateId;
     }
 }

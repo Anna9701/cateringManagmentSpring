@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <title>Order</title>
     <title th:replace="fragments/header :: headStyles"></title>
@@ -20,6 +20,9 @@
             <input type="hidden" th:field="${order.id}"/>
 
             <input type="hidden" th:field="${order.cateringId}"/>
+            <input type="hidden" th:field="${order.clientId}"/>
+            <input type="hidden" th:field="${order.placeId}"/>
+            <input type="hidden" th:field="${order.dateId}"/>
 
             <div class="form-group">
                 <label for="amountOfPeople" class="cols-sm-2 control-label">Amount of people</label>
@@ -38,6 +41,15 @@
                         <label for="invoice">Invoice</label>
                         <input type="checkbox"  th:field="${order.invoice}"
                                placeholder="invoice" id="invoice" class="form-control inputField"/>
+                    </div>
+                </div>
+            </div>
+            <div sec:authorize="hasAuthority('ADMIN')" class="form-group">
+                <div class="cols-sm-10">
+                    <div class="input-group">
+                        <label for="payedUp">Payed up</label>
+                        <input type="checkbox"  th:field="${order.payedUp}"
+                               placeholder="payedUp" id="payedUp" class="form-control inputField"/>
                     </div>
                 </div>
             </div>
