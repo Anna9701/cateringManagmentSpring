@@ -58,5 +58,3 @@ public class AdminPanelController {
         return modelAndView;
     }
 }
-
-//TODO admin lista klientow
