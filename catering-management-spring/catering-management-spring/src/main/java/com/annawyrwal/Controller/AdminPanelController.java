@@ -22,4 +22,3 @@ public class AdminPanelController {
 
 //TODO some admin pannel. maybe password change ?
 //TODO email confirmation
-//TODO Admin should have possibility to change to payedUp in edit oreder form

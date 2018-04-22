@@ -24,7 +24,7 @@
             <input type="hidden" th:field="${order.placeId}"/>
             <input type="hidden" th:field="${order.dateId}"/>
 
-            <div class="form-group">
+            <div sec:authorize="hasAuthority('USER')" class="form-group">
                 <label for="amountOfPeople" class="cols-sm-2 control-label">Amount of people</label>
                 <div class="cols-sm-10">
                     <div class="input-group">
@@ -35,7 +35,7 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            <div sec:authorize="hasAuthority('USER')" class="form-group">
                 <div class="cols-sm-10">
                     <div class="input-group">
                         <label for="invoice">Invoice</label>

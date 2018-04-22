@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <title>Date</title>
     <title th:replace="fragments/header :: headStyles"></title>
@@ -43,7 +43,7 @@
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-primary block full-width m-b text-center">Update</button>
+            <button sec:authorize="hasAuthority('USER')" type="submit" class="btn btn-primary block full-width m-b text-center">Update</button>
         </form>
         <a th:href="@{/catering/__${cateringId}__/orders/orders}"><button class="btn btn-default">Back</button></a>
     </div>
